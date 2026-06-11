@@ -91,6 +91,7 @@ export function HeroRadioVisual() {
             )}
             {item.variant === "presets" && (
               <div className="hero-orbit-pill hero-orbit-pill--presets">
+                <span className="hero-orbit-pill--presets-label">Presets</span>
                 {PRESETS.map((p, i) => (
                   <span
                     key={p}

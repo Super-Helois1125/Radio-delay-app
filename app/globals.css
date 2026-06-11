@@ -192,8 +192,8 @@
     }
 
     .hero-col--right {
-      justify-content: flex-end;
-      transform: translateX(1.25rem);
+      justify-content: center;
+      transform: translateX(-1.75rem);
     }
   }
 
@@ -203,7 +203,7 @@
     }
 
     .hero-col--right {
-      transform: translateX(2.25rem);
+      transform: translateX(-3rem);
     }
   }
 
@@ -523,15 +523,15 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: min(100%, 340px);
-  max-height: min(42dvh, 340px);
+  max-width: min(100%, 360px);
+  max-height: min(44dvh, 360px);
   margin-inline: auto;
 }
 
 @media (min-width: 1024px) {
   .hero-radio-stage {
-    margin-inline: 0 0 auto;
-    max-width: min(100%, 360px);
+    max-width: min(100%, 400px);
+    max-height: min(46dvh, 400px);
   }
 }
 
@@ -595,33 +595,34 @@
   z-index: 2;
 }
 
+/* Cardinal compass — equal 6% inset on all four sides */
 .hero-orbit-item--top {
   left: 50%;
-  top: 2%;
+  top: 6%;
   translate: -50% 0;
 }
 
 .hero-orbit-item--right {
-  right: 0;
-  top: 42%;
+  right: 6%;
+  left: auto;
+  top: 50%;
+  bottom: auto;
   translate: 0 -50%;
-}
-
-@media (min-width: 1024px) {
-  .hero-orbit-item--right {
-    right: -10%;
-  }
 }
 
 .hero-orbit-item--bottom {
   left: 50%;
-  bottom: 2%;
+  right: auto;
+  top: auto;
+  bottom: 6%;
   translate: -50% 0;
 }
 
 .hero-orbit-item--left {
-  left: 0;
-  top: 42%;
+  left: 6%;
+  right: auto;
+  top: 50%;
+  bottom: auto;
   translate: 0 -50%;
 }
 
@@ -661,24 +662,33 @@
 }
 
 .hero-orbit-pill--presets {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  max-width: 9rem;
-  padding: 0.55rem 0.65rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.25rem;
+  min-width: 2.75rem;
+  padding: 0.5rem 0.4rem;
   background: hsl(222 50% 8% / 0.75);
   border: 1px solid hsl(var(--primary) / 0.18);
-  border-radius: 2rem;
+  border-radius: 1.25rem;
+}
+
+.hero-orbit-pill--presets-label {
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
 }
 
 .hero-preset-dot {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 2rem;
-  padding: 0.2rem 0.45rem;
+  width: 100%;
+  padding: 0.18rem 0.25rem;
   border-radius: 9999px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   border: 1px solid hsl(var(--border));
   color: hsl(var(--muted-foreground));
