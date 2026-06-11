@@ -5,7 +5,13 @@ import type { ElementType, ReactNode, Ref } from "react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { cn } from "@/lib/utils";
 
-type AnimationVariant = "fade-up" | "fade-in" | "fade-left" | "fade-right" | "scale";
+type AnimationVariant =
+  | "fade-up"
+  | "fade-in"
+  | "fade-left"
+  | "fade-right"
+  | "scale"
+  | "zoom-out";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -23,6 +29,7 @@ const variantClass: Record<AnimationVariant, string> = {
   "fade-left": "reveal-fade-left",
   "fade-right": "reveal-fade-right",
   scale: "reveal-scale",
+  "zoom-out": "reveal-zoom-out",
 };
 
 export function ScrollReveal({

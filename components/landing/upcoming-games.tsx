@@ -4,6 +4,7 @@ import { CalendarDays, Tv } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { formatGameDate, formatGameTime } from "@/lib/utils";
 import { scheduleService } from "@/services/schedule-service";
 
 export function UpcomingGames() {
@@ -13,7 +14,6 @@ export function UpcomingGames() {
     <div className="grid gap-4 md:grid-cols-3">
       {games.map((game) => {
         const team = scheduleService.getTeam(game.teamId);
-        const date = new Date(game.startTime);
         return (
           <Card key={game.id} className="intense-card hover:-translate-y-1 hover:shadow-brand">
             <CardContent className="relative z-[1] space-y-3 p-5">
@@ -32,16 +32,7 @@ export function UpcomingGames() {
               </h3>
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
                 <CalendarDays className="h-4 w-4 text-primary" />
-                {date.toLocaleDateString(undefined, {
-                  weekday: "short",
-                  month: "short",
-                  day: "numeric",
-                })}{" "}
-                ·{" "}
-                {date.toLocaleTimeString(undefined, {
-                  hour: "numeric",
-                  minute: "2-digit",
-                })}
+                {formatGameDate(game.startTime)} · {formatGameTime(game.startTime)} ET
               </p>
             </CardContent>
           </Card>

@@ -11,6 +11,7 @@ type ShowcaseCardProps = {
   secondaryHref?: string;
   secondaryLabel?: string;
   icon?: LucideIcon;
+  compact?: boolean;
   className?: string;
 };
 
@@ -22,10 +23,13 @@ export function ShowcaseCard({
   secondaryHref,
   secondaryLabel = "Open player",
   icon: Icon,
+  compact = false,
   className,
 }: ShowcaseCardProps) {
   return (
-    <article className={cn("showcase-card group", className)}>
+    <article
+      className={cn("showcase-card group", compact && "showcase-card--compact", className)}
+    >
       <div className="showcase-card__media">
         <div className="showcase-card__media-inner">
           {Icon && (

@@ -61,7 +61,7 @@ export const UPCOMING_GAMES: ScheduledGame[] = [
     id: "g1",
     teamId: "byu",
     opponent: "Utah Utes",
-    startTime: futureISO(2),
+    startTime: "2026-06-07T23:00:00.000Z",
     network: "ESPN",
     homeAway: "home",
   },
@@ -69,7 +69,7 @@ export const UPCOMING_GAMES: ScheduledGame[] = [
     id: "g2",
     teamId: "duke",
     opponent: "North Carolina",
-    startTime: futureISO(26),
+    startTime: "2026-06-09T23:30:00.000Z",
     network: "ABC",
     homeAway: "away",
   },
@@ -77,7 +77,7 @@ export const UPCOMING_GAMES: ScheduledGame[] = [
     id: "g3",
     teamId: "byu",
     opponent: "Baylor Bears",
-    startTime: futureISO(74),
+    startTime: "2026-06-12T00:00:00.000Z",
     network: "FOX",
     homeAway: "away",
   },
@@ -99,6 +99,3 @@ export function getStationsForTeam(teamId: string): Station[] {
     .filter((s): s is Station => Boolean(s));
 }
 
-function futureISO(hoursFromNow: number): string {
-  return new Date(Date.now() + hoursFromNow * 3600_000).toISOString();
-}

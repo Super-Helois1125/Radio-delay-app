@@ -202,12 +202,26 @@
     box-shadow: var(--glass-shadow), var(--neon-glow);
   }
 
-  .showcase-stack {
-    @apply mx-auto flex w-full max-w-5xl flex-col gap-20 md:gap-24;
+  .showcase-stagger-grid {
+    @apply mx-auto grid w-full max-w-4xl grid-cols-1 gap-6;
+  }
+
+  @media (min-width: 768px) {
+    .showcase-stagger-grid {
+      @apply max-w-3xl grid-cols-2 gap-x-8;
+    }
+
+    .showcase-stagger-grid__col--offset {
+      padding-top: 3.5rem;
+    }
+  }
+
+  .showcase-stagger-grid__col {
+    @apply flex flex-col gap-6;
   }
 
   .showcase-card__media {
-    @apply relative overflow-hidden rounded-[1.75rem] border border-primary/35;
+    @apply relative overflow-hidden rounded-2xl border border-primary/35;
     aspect-ratio: 16 / 10;
     background: hsl(222 55% 6%);
     box-shadow:
@@ -265,6 +279,47 @@
     @apply inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors hover:text-primary;
   }
 
+  .showcase-card--compact .showcase-card__media {
+    aspect-ratio: 5 / 3;
+    border-radius: 1.25rem;
+    box-shadow:
+      0 0 0 1px hsl(211 100% 50% / 0.06),
+      0 12px 32px hsl(222 80% 4% / 0.45),
+      0 0 24px hsl(211 100% 50% / 0.1);
+  }
+
+  .showcase-card--compact .showcase-card__icon {
+    @apply h-12 w-12 rounded-xl;
+  }
+
+  .showcase-card--compact .showcase-card__icon svg {
+    @apply h-6 w-6;
+  }
+
+  .showcase-card--compact .showcase-card__body {
+    @apply grid-cols-1 gap-3 pt-4;
+  }
+
+  .showcase-card--compact .showcase-card__title {
+    @apply text-lg md:text-xl;
+  }
+
+  .showcase-card--compact .showcase-card__description {
+    @apply text-sm leading-relaxed;
+  }
+
+  .showcase-card--compact .showcase-card__links {
+    @apply gap-4 pt-0;
+  }
+
+  .showcase-card--compact .showcase-card__media-glow {
+    background: radial-gradient(
+      260px circle at var(--spotlight-x) var(--spotlight-y),
+      hsl(211 80% 45% / 0.2),
+      transparent 68%
+    );
+  }
+
   .intense-card {
     @apply glass-card relative overflow-hidden;
   }
@@ -287,11 +342,13 @@
   .reveal-fade-in,
   .reveal-fade-left,
   .reveal-fade-right,
-  .reveal-scale {
+  .reveal-scale,
+  .reveal-zoom-out {
     opacity: 0;
     transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
@@ -311,13 +368,20 @@
     transform: scale(0.94);
   }
 
+  .reveal-zoom-out {
+    transform: scale(1.1);
+    filter: blur(6px);
+  }
+
   .reveal-fade-up.is-visible,
   .reveal-fade-in.is-visible,
   .reveal-fade-left.is-visible,
   .reveal-fade-right.is-visible,
-  .reveal-scale.is-visible {
+  .reveal-scale.is-visible,
+  .reveal-zoom-out.is-visible {
     opacity: 1;
     transform: none;
+    filter: blur(0);
   }
 }
 
