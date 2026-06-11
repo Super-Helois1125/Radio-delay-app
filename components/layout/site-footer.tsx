@@ -3,7 +3,7 @@ import { Radio } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="w-full border-t border-border bg-background/80 text-muted-foreground backdrop-blur-sm">
+    <footer className="glass w-full border-t border-border text-muted-foreground">
       <div className="page-gutter grid w-full gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <Link href="/" className="flex items-center gap-2">

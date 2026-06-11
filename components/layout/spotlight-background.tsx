@@ -3,8 +3,7 @@
 import { useEffect } from "react";
 
 /**
- * Light dot-grid background with a soft radial spotlight that follows the pointer.
- * Inspired by the Mahenoor Salat portfolio reference site.
+ * Dark navy background with a soft blue radial spotlight that follows the pointer.
  */
 export function SpotlightBackground() {
   useEffect(() => {
@@ -28,6 +27,7 @@ export function SpotlightBackground() {
       <div className="spotlight-bg__dots spotlight-bg__dots--brand" />
       <div className="spotlight-bg__glow spotlight-bg__glow--static" />
       <div className="spotlight-bg__glow spotlight-bg__glow--pointer" />
+      <div className="spotlight-bg__vignette" />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { Clock, Mail, Radio } from "lucide-react";
 /** Full-width slim glass strip above the main navigation. */
 export function TopBar() {
   return (
-    <div className="hidden w-full border-b border-border bg-background/70 text-muted-foreground backdrop-blur-sm md:block">
+    <div className="glass hidden w-full border-b border-border text-muted-foreground md:block">
       <div className="page-gutter flex h-9 w-full items-center justify-between text-xs">
         <ul className="flex items-center gap-8">
           <li className="flex items-center gap-2 text-foreground/80">

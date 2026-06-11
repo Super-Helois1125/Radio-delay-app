@@ -74,11 +74,11 @@ export default function HomePage() {
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/30"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#000814]/92 via-[#000814]/75 to-[#000814]/40"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-primary/5"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#000308]/85 via-transparent to-primary/10"
           aria-hidden
         />
         <div className="hero-inner relative py-4 md:py-6">
@@ -169,7 +169,7 @@ export default function HomePage() {
       {/* CTA */}
       <section className="page-gutter w-full pb-24 pt-8">
         <ScrollReveal variant="scale">
-          <div className="relative w-full overflow-hidden rounded-3xl border border-border bg-muted/50 px-8 py-16 text-center shadow-soft md:px-20 md:py-20">
+          <div className="relative w-full overflow-hidden rounded-3xl border border-primary/25 bg-[hsl(222_45%_8%/0.8)] px-8 py-16 text-center shadow-neon backdrop-blur-sm md:px-20 md:py-20">
             <h2 className="relative section-heading">
               Ready to stop hearing spoilers?
             </h2>

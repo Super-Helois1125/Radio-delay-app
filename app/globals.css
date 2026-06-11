@@ -4,28 +4,28 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 6%;
+    --background: 222 60% 4%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 6%;
+    --card: 222 45% 8%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 6%;
+    --popover: 222 45% 8%;
+    --popover-foreground: 210 40% 98%;
 
     --primary: 211 100% 50%;
     --primary-foreground: 0 0% 100%;
     --brand-cyan: 199 89% 48%;
     --brand-violet: 228 55% 58%;
 
-    --secondary: 220 20% 96%;
-    --secondary-foreground: 222 47% 20%;
+    --secondary: 222 35% 12%;
+    --secondary-foreground: 210 30% 85%;
 
-    --muted: 220 16% 96%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 222 32% 11%;
+    --muted-foreground: 215 18% 62%;
 
-    --accent: 220 20% 96%;
-    --accent-foreground: 211 100% 40%;
+    --accent: 222 35% 14%;
+    --accent-foreground: 211 90% 70%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -36,21 +36,24 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 10%;
 
-    --border: 220 14% 90%;
-    --input: 220 14% 88%;
+    --border: 222 28% 16%;
+    --input: 222 28% 14%;
     --ring: 211 100% 50%;
 
     --radius: 0.75rem;
 
-    --surface-muted: 220 20% 97%;
-    --surface-wine: 220 20% 97%;
-    --glass-bg: hsl(0 0% 100% / 0.72);
-    --glass-border: hsl(220 14% 90% / 0.9);
-    --glass-shadow: 0 8px 30px hsl(220 20% 20% / 0.06);
-    --neon-glow: 0 8px 24px hsl(211 100% 50% / 0.12);
+    --surface-muted: 222 40% 10%;
+    --surface-wine: 222 40% 10%;
+    --glass-bg: hsl(222 50% 8% / 0.62);
+    --glass-border: hsl(211 80% 55% / 0.14);
+    --glass-shadow: 0 8px 32px hsl(222 80% 4% / 0.45);
+    --neon-glow: 0 0 32px hsl(211 100% 50% / 0.2);
 
     --spotlight-x: 50%;
     --spotlight-y: 38%;
+    --bg-deep: #000308;
+    --bg-navy: #000814;
+    --bg-navy-mid: #000a1a;
   }
 }
 
@@ -90,9 +93,9 @@
     @apply relative w-full border-y border-border py-16 md:py-24;
     background: linear-gradient(
       180deg,
-      hsl(var(--muted) / 0.5) 0%,
+      hsl(222 50% 6% / 0.6) 0%,
       transparent 50%,
-      hsl(var(--muted) / 0.35) 100%
+      hsl(222 50% 6% / 0.4) 100%
     );
   }
 
@@ -170,7 +173,7 @@
   }
 
   .eyebrow {
-    @apply mb-3 inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-bold uppercase tracking-widest text-muted-foreground;
+    @apply mb-3 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary;
   }
 
   /* Glass surfaces */
@@ -204,17 +207,21 @@
   }
 
   .showcase-card__media {
-    @apply relative overflow-hidden rounded-[1.75rem] shadow-[0_20px_50px_hsl(222_47%_6%_/0.12)];
+    @apply relative overflow-hidden rounded-[1.75rem] border border-primary/35;
     aspect-ratio: 16 / 10;
-    background: hsl(222 47% 8%);
+    background: hsl(222 55% 6%);
+    box-shadow:
+      0 0 0 1px hsl(211 100% 50% / 0.08),
+      0 20px 50px hsl(222 80% 4% / 0.55),
+      0 0 40px hsl(211 100% 50% / 0.12);
   }
 
   .showcase-card__media-inner {
     @apply relative flex h-full w-full items-center justify-center;
     background: radial-gradient(
-      ellipse 80% 70% at 70% 20%,
-      hsl(var(--brand-violet) / 0.35),
-      hsl(222 47% 8%) 55%
+      ellipse 85% 75% at 65% 25%,
+      hsl(211 70% 22% / 0.55),
+      hsl(222 55% 6%) 58%
     );
   }
 
@@ -227,11 +234,11 @@
     inset: 0;
     pointer-events: none;
     background: radial-gradient(
-      420px circle at var(--spotlight-x) var(--spotlight-y),
-      hsl(0 0% 100% / 0.14),
-      transparent 65%
+      380px circle at var(--spotlight-x) var(--spotlight-y),
+      hsl(211 80% 45% / 0.22),
+      transparent 68%
     );
-    transition: opacity 0.2s ease;
+    transition: background 0.15s ease-out;
   }
 
   .showcase-card__body {
@@ -314,7 +321,7 @@
   }
 }
 
-/* Light dot-grid background + pointer spotlight (reference portfolio style) */
+/* Dark navy background + blue pointer spotlight */
 .spotlight-bg {
   position: fixed;
   inset: 0;
@@ -326,7 +333,12 @@
 .spotlight-bg__base {
   position: absolute;
   inset: 0;
-  background: hsl(var(--background));
+  background: linear-gradient(
+    128deg,
+    var(--bg-deep) 0%,
+    var(--bg-navy) 42%,
+    var(--bg-navy-mid) 100%
+  );
 }
 
 .spotlight-bg__dots {
@@ -336,12 +348,12 @@
 }
 
 .spotlight-bg__dots--soft {
-  opacity: 0.45;
-  background-image: radial-gradient(rgb(153 204 238) 1px, transparent 1px);
+  opacity: 0.14;
+  background-image: radial-gradient(rgb(100 160 220) 1px, transparent 1px);
 }
 
 .spotlight-bg__dots--brand {
-  opacity: 0.18;
+  opacity: 0.08;
   background-image: radial-gradient(rgb(0 119 181) 1px, transparent 1px);
   background-size: 10px 10px;
 }
@@ -352,24 +364,34 @@
 }
 
 .spotlight-bg__glow--static {
-  inset: -20%;
-  opacity: 0.9;
+  inset: -15%;
+  opacity: 0.55;
   background: radial-gradient(
-    12.5% 12.5% at 50% 37.5%,
-    rgb(226 232 240),
-    transparent
+    ellipse 55% 45% at 55% 35%,
+    hsl(211 65% 18% / 0.65),
+    transparent 70%
   );
 }
 
 .spotlight-bg__glow--pointer {
   inset: 0;
   background: radial-gradient(
-    720px circle at var(--spotlight-x) var(--spotlight-y),
-    hsl(0 0% 100% / 0.95),
-    hsl(226 232 240 / 0.45) 38%,
+    640px circle at var(--spotlight-x) var(--spotlight-y),
+    hsl(211 75% 32% / 0.42),
+    hsl(211 60% 18% / 0.18) 38%,
     transparent 68%
   );
-  transition: background 0.15s ease-out;
+  transition: background 0.12s ease-out;
+}
+
+.spotlight-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 80% at 50% 45%,
+    transparent 30%,
+    hsl(222 80% 3% / 0.65) 100%
+  );
 }
 
 /* Hero 3D radio — pong bounce + circular orbit badges */
@@ -494,24 +516,24 @@
 .hero-orbit-pill--glass {
   min-width: 7.5rem;
   padding: 0.65rem 1.1rem;
-  background: hsl(0 0% 100% / 0.82);
-  border: 1px solid hsl(var(--border));
+  background: hsl(222 50% 8% / 0.75);
+  border: 1px solid hsl(var(--primary) / 0.2);
 }
 
 .hero-orbit-pill--live {
   flex-direction: row;
   gap: 0.4rem;
   padding: 0.5rem 1rem;
-  background: hsl(0 0% 100% / 0.88);
-  border: 1px solid hsl(var(--border));
+  background: hsl(222 50% 8% / 0.8);
+  border: 1px solid hsl(var(--primary) / 0.25);
   box-shadow: var(--glass-shadow);
 }
 
 .hero-orbit-pill--delay {
   min-width: 5.5rem;
   padding: 0.5rem 1rem;
-  background: hsl(0 0% 100% / 0.85);
-  border: 2px solid hsl(var(--primary) / 0.25);
+  background: hsl(222 50% 8% / 0.78);
+  border: 2px solid hsl(var(--primary) / 0.35);
 }
 
 .hero-orbit-pill--presets {
@@ -520,8 +542,8 @@
   gap: 0.35rem;
   max-width: 9rem;
   padding: 0.55rem 0.65rem;
-  background: hsl(0 0% 100% / 0.85);
-  border: 1px solid hsl(var(--border));
+  background: hsl(222 50% 8% / 0.75);
+  border: 1px solid hsl(var(--primary) / 0.18);
   border-radius: 2rem;
 }
 
@@ -536,7 +558,7 @@
   font-weight: 700;
   border: 1px solid hsl(var(--border));
   color: hsl(var(--muted-foreground));
-  background: hsl(var(--muted));
+  background: hsl(222 40% 12% / 0.9);
 }
 
 .hero-preset-dot--active {
@@ -567,8 +589,8 @@
 .hero-left-glass-panel {
   padding: 0.85rem 1.1rem;
   border-radius: 1.25rem;
-  background: hsl(0 0% 100% / 0.75);
-  border: 1px solid hsl(var(--border));
+  background: hsl(222 50% 8% / 0.7);
+  border: 1px solid hsl(var(--primary) / 0.18);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: var(--glass-shadow);
@@ -588,15 +610,15 @@
 }
 
 .hero-left-cta-secondary {
-  border-color: hsl(var(--border)) !important;
-  background: hsl(0 0% 100% / 0.7) !important;
+  border-color: hsl(var(--primary) / 0.25) !important;
+  background: hsl(222 50% 8% / 0.55) !important;
   color: hsl(var(--foreground)) !important;
   backdrop-filter: blur(12px);
 }
 
 .hero-left-cta-secondary:hover {
-  background: hsl(0 0% 100% / 0.95) !important;
-  border-color: hsl(var(--primary) / 0.35) !important;
+  background: hsl(222 50% 10% / 0.85) !important;
+  border-color: hsl(var(--primary) / 0.45) !important;
 }
 
 .hero-shortcut-chip {
@@ -608,8 +630,8 @@
   font-size: 0.7rem;
   font-weight: 600;
   color: hsl(var(--muted-foreground));
-  background: hsl(0 0% 100% / 0.72);
-  border: 1px solid hsl(var(--border));
+  background: hsl(222 50% 8% / 0.65);
+  border: 1px solid hsl(var(--primary) / 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }

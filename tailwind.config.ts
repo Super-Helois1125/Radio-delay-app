@@ -82,7 +82,7 @@ const config: Config = {
           "linear-gradient(180deg, hsl(var(--brand-violet) / 0.06) 0%, transparent 50%, hsl(var(--brand-cyan) / 0.05) 100%)",
       },
       boxShadow: {
-        soft: "0 4px 24px rgb(0 0 0 / 25%)",
+        soft: "0 4px 24px rgb(0 0 0 / 40%)",
         brand: "0 8px 28px 0 hsl(211 100% 50% / 0.18)",
         neon: "0 4px 20px hsl(211 100% 50% / 0.12)",
       },
