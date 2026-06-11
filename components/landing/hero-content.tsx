@@ -19,8 +19,8 @@ const SHORTCUTS = [
 
 export function HeroContent() {
   return (
-    <div className="hero-left-stage w-full">
-      <div className="hero-pong hero-left-pong">
+    <div className="hero-left-stage hero-left-zone">
+      <div className="hero-pong hero-left-pong hero-left-stack">
         <div className="hero-orbit-pill hero-orbit-pill--glass hero-left-badge inline-flex flex-row items-center gap-2 !rounded-full !px-3 !py-1.5">
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-gradient text-white shadow-brand">
             <Radio className="h-3 w-3" />
@@ -36,21 +36,21 @@ export function HeroContent() {
           <Sparkles className="ml-0.5 h-3.5 w-3.5 text-primary/60" />
         </div>
 
-        <h1 className="hero-left-title mt-4 text-[1.75rem] font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.35rem] xl:text-5xl">
+        <h1 className="hero-left-title">
           Hear the game in{" "}
           <span className="brand-gradient-text">perfect sync</span>
           <br />
           <span className="text-foreground/90">with your TV</span>
         </h1>
 
-        <div className="hero-left-glass-panel mt-3 max-w-lg">
+        <div className="hero-left-glass-panel">
           <p className="text-sm leading-relaxed text-foreground/75 lg:text-base">
             Delay your sports radio stream so the call lines up with your
             broadcast — no more hearing the touchdown before you see it.
           </p>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
           {STATS.map((stat) => (
             <div
               key={stat.label}
@@ -67,11 +67,11 @@ export function HeroContent() {
           ))}
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-2.5">
+        <div className="hero-left-actions flex flex-wrap items-center gap-2">
           <Button
             size="default"
             variant="gradient"
-            className="h-11 rounded-full px-6 shadow-brand"
+            className="h-10 rounded-full px-5 text-sm shadow-brand sm:h-11 sm:px-6 sm:text-base"
             asChild
           >
             <Link href="/player">
@@ -83,14 +83,14 @@ export function HeroContent() {
           <Button
             size="default"
             variant="outline"
-            className="hero-left-cta-secondary h-11 rounded-full px-6"
+            className="hero-left-cta-secondary h-10 rounded-full px-5 text-sm sm:h-11 sm:px-6 sm:text-base"
             asChild
           >
             <Link href="/stream-tester">Test a stream</Link>
           </Button>
         </div>
 
-        <div className="mt-4 hidden flex-wrap items-center gap-2 sm:flex">
+        <div className="hidden flex-wrap items-center gap-2 sm:flex">
           <span className="mr-0.5 text-[9px] font-bold uppercase tracking-widest text-muted-foreground">
             Shortcuts
           </span>

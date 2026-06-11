@@ -47,7 +47,7 @@ export default function HomePage() {
         <div className="hero-inner relative py-4 md:py-6">
           <div className="hero-grid">
             <div className="hero-col hero-col--left">
-              <ScrollReveal variant="fade-right" instant className="w-full max-w-xl">
+              <ScrollReveal variant="fade-right" instant className="hero-left-zone w-full">
                 <HeroContent />
               </ScrollReveal>
             </div>
@@ -87,7 +87,7 @@ export default function HomePage() {
             {STEPS.map((s, i) => (
               <ScrollReveal key={s.n} variant="scale" delay={i * 120}>
                 <div className="intense-card h-full p-8 hover:-translate-y-1 hover:shadow-brand">
-                  <span className="text-5xl font-extrabold text-primary/30">
+                  <span className="text-5xl font-extrabold text-primary/45">
                     {s.n}
                   </span>
                   <h3 className="mt-3 text-xl font-bold">{s.title}</h3>
