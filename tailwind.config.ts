@@ -73,18 +73,18 @@ const config: Config = {
       },
       backgroundImage: {
         "brand-gradient":
-          "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--brand-cyan)) 50%, hsl(var(--brand-violet)) 100%)",
+          "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--brand-cyan)) 55%, hsl(var(--brand-violet)) 100%)",
         "brand-soft":
-          "linear-gradient(135deg, hsl(280 14% 24% / 0.4) 0%, hsl(280 12% 20% / 0.3) 50%, hsl(280 14% 22% / 0.35) 100%)",
+          "linear-gradient(135deg, hsl(220 20% 98%) 0%, hsl(220 16% 96%) 50%, hsl(0 0% 100%) 100%)",
         "hero-mesh":
-          "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(350 38% 58% / 0.12), transparent), radial-gradient(ellipse 60% 50% at 80% 20%, hsl(38 42% 55% / 0.1), transparent), radial-gradient(ellipse 50% 40% at 60% 80%, hsl(228 26% 55% / 0.08), transparent)",
+          "radial-gradient(ellipse 80% 60% at 20% 40%, hsl(211 100% 50% / 0.08), transparent), radial-gradient(ellipse 60% 50% at 80% 20%, hsl(199 89% 48% / 0.06), transparent)",
         "intense-panel":
           "linear-gradient(180deg, hsl(var(--brand-violet) / 0.06) 0%, transparent 50%, hsl(var(--brand-cyan) / 0.05) 100%)",
       },
       boxShadow: {
         soft: "0 4px 24px rgb(0 0 0 / 25%)",
-        brand: "0 8px 28px 0 hsl(350 38% 62% / 0.18)",
-        neon: "0 4px 20px hsl(350 38% 62% / 0.12)",
+        brand: "0 8px 28px 0 hsl(211 100% 50% / 0.18)",
+        neon: "0 4px 20px hsl(211 100% 50% / 0.12)",
       },
       keyframes: {
         "accordion-down": {

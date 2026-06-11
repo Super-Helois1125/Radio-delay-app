@@ -44,7 +44,7 @@ export function SiteHeader() {
         <div
           className={cn(
             "flex h-[3.75rem] items-center justify-between rounded-full border px-3 sm:px-5 transition-all duration-300",
-            "glass border-primary/20",
+            "glass border-border shadow-soft",
             scrolled && "shadow-brand"
           )}
         >

@@ -2,52 +2,48 @@ import Link from "next/link";
 import {
   ArrowRight,
   Gauge,
-  KeyRound,
-  ShieldCheck,
   SlidersHorizontal,
   TestTube2,
   Tv,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { HeroContent } from "@/components/landing/hero-content";
 import { HeroRadioVisual } from "@/components/landing/hero-radio-visual";
+import { ShowcaseCard } from "@/components/landing/showcase-card";
 import { UpcomingGames } from "@/components/landing/upcoming-games";
 
-const FEATURES = [
+const SHOWCASE = [
   {
     icon: SlidersHorizontal,
     title: "Precise 0–120s delay",
     text: "Shift radio audio in 1-, 10-, or 60-second steps, or jump to a preset. Changes apply smoothly with no clicks.",
+    href: "/player",
+    secondaryHref: "/stream-tester",
   },
   {
     icon: Gauge,
-    title: "Ring-buffer engine",
+    title: "Ring-buffer audio engine",
     text: "A Web Audio AudioWorklet ring buffer delivers low-latency, sample-accurate delay that ramps gracefully in real time.",
+    href: "/player",
+    secondaryHref: "/saved-streams",
   },
   {
     icon: Tv,
-    title: "Radio ahead or behind?",
-    text: "Tell us how the radio compares to your TV and we guide you to the exact fix — delay the audio, or delay the video.",
+    title: "Radio ahead or behind your TV?",
+    text: "Tell us how the radio compares to your broadcast and we guide you to the exact fix — delay the audio, or delay the video.",
+    href: "/player",
+    secondaryHref: "/stream-tester",
   },
   {
     icon: TestTube2,
     title: "Stream tester",
     text: "Paste any stream URL to verify it loads, plays, and supports processing before you rely on it for game day.",
+    href: "/stream-tester",
+    secondaryHref: "/player",
   },
-  {
-    icon: ShieldCheck,
-    title: "Secure by default",
-    text: "Accounts and saved streams are protected by Supabase Row Level Security — you only ever see your own data.",
-  },
-  {
-    icon: KeyRound,
-    title: "Keyboard shortcuts",
-    text: "Mute with “m”, play/pause with space, and nudge the delay with the arrow keys — built for fast, hands-on tuning.",
-  },
-];
+] as const;
 
 const STEPS = [
   {
@@ -78,15 +74,11 @@ export default function HomePage() {
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[hsl(280_14%_14%/0.55)] via-[hsl(280_12%_18%/0.3)] to-transparent md:from-[hsl(280_14%_14%/0.45)] md:via-[hsl(280_12%_18%/0.2)]"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/30"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[hsl(280_14%_12%/0.4)] via-transparent to-[hsl(350_38%_62%/0.06)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_70%_50%,hsl(var(--brand-violet)/0.1),transparent)]"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-primary/5"
           aria-hidden
         />
         <div className="hero-inner relative py-4 md:py-6">
@@ -105,7 +97,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Showcase — reference-style stacked cards */}
       <section className="page-section w-full">
         <ScrollReveal className="mx-auto max-w-3xl text-center">
           <span className="eyebrow">Why PlayDelay</span>
@@ -118,20 +110,18 @@ export default function HomePage() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-16 grid w-full gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {FEATURES.map((f, i) => (
-            <ScrollReveal key={f.title} delay={i * 80}>
-              <Card className="intense-card h-full border-primary/15 hover:-translate-y-1 hover:shadow-brand">
-                <CardContent className="relative z-[1] space-y-4 p-7">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gradient text-white shadow-brand">
-                    <f.icon className="h-6 w-6" />
-                  </span>
-                  <h3 className="text-xl font-bold">{f.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {f.text}
-                  </p>
-                </CardContent>
-              </Card>
+        <div className="showcase-stack mt-16">
+          {SHOWCASE.map((item, i) => (
+            <ScrollReveal key={item.title} delay={i * 100}>
+              <ShowcaseCard
+                icon={item.icon}
+                title={item.title}
+                description={item.text}
+                href={item.href}
+                secondaryHref={item.secondaryHref}
+                linkLabel="Learn more"
+                secondaryLabel="Open player"
+              />
             </ScrollReveal>
           ))}
         </div>
@@ -179,18 +169,18 @@ export default function HomePage() {
       {/* CTA */}
       <section className="page-gutter w-full pb-24 pt-8">
         <ScrollReveal variant="scale">
-          <div className="relative w-full overflow-hidden rounded-3xl border border-primary/20 bg-brand-gradient px-8 py-16 text-center text-primary-foreground shadow-brand md:px-20 md:py-20">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08),transparent_55%)]" />
-            <h2 className="relative section-heading text-primary-foreground">
+          <div className="relative w-full overflow-hidden rounded-3xl border border-border bg-muted/50 px-8 py-16 text-center shadow-soft md:px-20 md:py-20">
+            <h2 className="relative section-heading">
               Ready to stop hearing spoilers?
             </h2>
-            <p className="relative mx-auto mt-4 max-w-2xl text-lg text-white/90">
+            <p className="relative mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
               Open the player and dial in your delay in seconds. It works right
               in your browser.
             </p>
             <Button
               size="lg"
-              className="relative mt-10 border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground backdrop-blur-md hover:bg-primary-foreground/20"
+              variant="gradient"
+              className="relative mt-10 rounded-full px-8"
               asChild
             >
               <Link href="/player">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 
 import { Providers } from "@/components/providers";
-import { AnimatedBackground } from "@/components/layout/animated-background";
+import { SpotlightBackground } from "@/components/layout/spotlight-background";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { TopBar } from "@/components/layout/top-bar";
@@ -29,10 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} font-sans antialiased`}>
         <Providers>
-          <AnimatedBackground />
+          <SpotlightBackground />
           <div className="relative flex min-h-screen flex-col">
             <TopBar />
             <SiteHeader />
