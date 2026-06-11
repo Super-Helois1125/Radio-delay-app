@@ -32,7 +32,7 @@ export default function HomePage() {
       {/* Hero — one viewport, equal column gutters */}
       <section className="hero-section relative w-full">
         <div
-          className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="hero-section__bg pointer-events-none absolute"
           style={{ backgroundImage: "url('/assets/hero/hero-bg.jpg')" }}
           aria-hidden
         />
@@ -41,7 +41,7 @@ export default function HomePage() {
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#000308]/85 via-transparent to-primary/10"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#000308]/55 via-transparent to-primary/10"
           aria-hidden
         />
         <div className="hero-inner relative py-4 md:py-6">

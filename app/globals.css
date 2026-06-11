@@ -114,6 +114,32 @@
     overflow: hidden;
   }
 
+  /* Faces near top + extend past bottom so grass fills the hero */
+  .hero-section__bg {
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 115%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 10%;
+  }
+
+  @media (min-width: 768px) {
+    .hero-section__bg {
+      height: 118%;
+      background-position: center 14%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-section__bg {
+      height: 120%;
+      background-position: center 18%;
+    }
+  }
+
   @media (min-width: 768px) {
     .hero-section {
       min-height: calc(100dvh - 8.5rem);
@@ -122,7 +148,7 @@
   }
 
   .hero-inner {
-    @apply page-gutter mx-auto w-full max-w-[1380px];
+    @apply page-gutter mx-auto w-full max-w-[1480px];
   }
 
   .hero-grid {
@@ -135,13 +161,13 @@
   @media (min-width: 1024px) {
     .hero-grid {
       grid-template-columns: 1fr 1fr;
-      gap: 2.5rem 3rem;
+      gap: 2rem 2.5rem;
     }
   }
 
   @media (min-width: 1280px) {
     .hero-grid {
-      gap: 2.5rem 4rem;
+      gap: 2rem 3rem;
     }
   }
 
@@ -158,6 +184,27 @@
 
   .hero-col--right {
     justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-col--left {
+      transform: translateX(-1.25rem);
+    }
+
+    .hero-col--right {
+      justify-content: flex-end;
+      transform: translateX(1.25rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-col--left {
+      transform: translateX(-2.25rem);
+    }
+
+    .hero-col--right {
+      transform: translateX(2.25rem);
+    }
   }
 
   .brand-gradient-text {
@@ -481,6 +528,13 @@
   margin-inline: auto;
 }
 
+@media (min-width: 1024px) {
+  .hero-radio-stage {
+    margin-inline: 0 0 auto;
+    max-width: min(100%, 360px);
+  }
+}
+
 .hero-pong {
   position: relative;
   width: 100%;
@@ -551,6 +605,12 @@
   right: 0;
   top: 42%;
   translate: 0 -50%;
+}
+
+@media (min-width: 1024px) {
+  .hero-orbit-item--right {
+    right: -10%;
+  }
 }
 
 .hero-orbit-item--bottom {
