@@ -91,11 +91,14 @@ export function PlayerShell() {
   if (!mounted) {
     return (
       <div className="grid gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardContent className="flex h-[520px] items-center justify-center pt-6 text-sm text-muted-foreground">
-            Loading player…
-          </CardContent>
-        </Card>
+        <div className="player-main-card lg:col-span-2">
+          <div className="player-main-card__border" aria-hidden />
+          <div className="player-main-card__inner">
+            <div className="player-main-card__content flex h-[520px] items-center justify-center text-sm text-muted-foreground">
+              Loading player…
+            </div>
+          </div>
+        </div>
         <div className="space-y-6">
           <Card>
             <CardContent className="h-40 pt-6" />
@@ -127,8 +130,10 @@ export function PlayerShell() {
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       {/* Main player */}
-      <Card className="glass-card lg:col-span-2">
-        <CardContent className="space-y-6 pt-6">
+      <div className="player-main-card lg:col-span-2">
+        <div className="player-main-card__border" aria-hidden />
+        <div className="player-main-card__inner">
+          <div className="player-main-card__content">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -200,8 +205,9 @@ export function PlayerShell() {
             <kbd className="rounded bg-muted px-1.5">↑</kbd>/
             <kbd className="rounded bg-muted px-1.5">↓</kbd> ±1s
           </div>
-        </CardContent>
-      </Card>
+          </div>
+        </div>
+      </div>
 
       {/* Sidebar */}
       <div className="space-y-6">

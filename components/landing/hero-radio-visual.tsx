@@ -90,19 +90,22 @@ export function HeroRadioVisual() {
               </div>
             )}
             {item.variant === "presets" && (
-              <div className="hero-orbit-pill hero-orbit-pill--presets">
-                <span className="hero-orbit-pill--presets-label">Presets</span>
-                {PRESETS.map((p, i) => (
-                  <span
-                    key={p}
-                    className={cn(
-                      "hero-preset-dot",
-                      i === 2 && "hero-preset-dot--active"
-                    )}
-                  >
-                    {p}
-                  </span>
-                ))}
+              <div className="hero-presets-card">
+                <span className="hero-presets-card__title">Presets</span>
+                <div className="hero-presets-card__list">
+                  {PRESETS.map((p, i) => (
+                    <button
+                      key={p}
+                      type="button"
+                      className={cn(
+                        "hero-presets-card__element",
+                        i === 2 && "hero-presets-card__element--active"
+                      )}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>

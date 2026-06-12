@@ -80,15 +80,23 @@ export function HeroContent() {
           </Button>
         </div>
 
-        <div className="hero-left-shortcuts-pill">
-          <Keyboard className="hero-left-shortcuts-pill__icon" />
-          <span className="hero-left-shortcuts-pill__label">Shortcuts</span>
-          <span className="hero-left-shortcuts-pill__divider" aria-hidden />
+        <div
+          className="hero-left-shortcuts-menu"
+          role="group"
+          aria-label="Keyboard shortcuts"
+        >
+          <div
+            className="hero-left-shortcuts-menu__item hero-left-shortcuts-menu__item--active"
+            aria-current="true"
+          >
+            <Keyboard className="hero-left-shortcuts-menu__icon" />
+            <span>Shortcuts</span>
+          </div>
           {SHORTCUTS.map((s) => (
-            <span key={s.key} className="hero-left-shortcuts-pill__item">
-              <kbd className="hero-left-shortcuts-pill__key">{s.key}</kbd>
-              {s.action}
-            </span>
+            <div key={s.key} className="hero-left-shortcuts-menu__item">
+              <kbd className="hero-left-shortcuts-menu__key">{s.key}</kbd>
+              <span>{s.action}</span>
+            </div>
           ))}
         </div>
       </div>

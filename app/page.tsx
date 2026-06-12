@@ -1,8 +1,5 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { CtaAnimatedCard } from "@/components/landing/cta-animated-card";
 import { HowItWorksStepCard } from "@/components/landing/how-it-works-step-card";
 import { HeroContent } from "@/components/landing/hero-content";
 import { HeroRadioVisual } from "@/components/landing/hero-radio-visual";
@@ -115,25 +112,7 @@ export default function HomePage() {
       {/* CTA */}
       <section className="page-gutter w-full pb-24 pt-8">
         <ScrollReveal variant="scale">
-          <div className="relative w-full overflow-hidden rounded-3xl border border-primary/25 bg-[hsl(222_45%_8%/0.8)] px-8 py-16 text-center shadow-neon backdrop-blur-sm md:px-20 md:py-20">
-            <h2 className="relative section-heading">
-              Ready to stop hearing spoilers?
-            </h2>
-            <p className="relative mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              Open the player and dial in your delay in seconds. It works right
-              in your browser.
-            </p>
-            <Button
-              size="lg"
-              variant="gradient"
-              className="relative mt-10 rounded-full px-8"
-              asChild
-            >
-              <Link href="/player">
-                Launch PlayDelay <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          <CtaAnimatedCard />
         </ScrollReveal>
       </section>
     </>

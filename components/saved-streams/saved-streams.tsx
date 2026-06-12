@@ -99,7 +99,7 @@ export function SavedStreams() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="saved-streams-toolbar flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
           {loading
             ? "Loading…"
@@ -157,21 +157,46 @@ export function SavedStreams() {
           <Loader2 className="h-6 w-6 animate-spin text-primary" />
         </div>
       ) : streams.length === 0 ? (
-        <Card>
-          <CardContent className="flex flex-col items-center gap-3 py-16 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-soft">
-              <Radio className="h-6 w-6 text-primary" />
-            </span>
-            <h3 className="text-lg font-bold">No saved streams yet</h3>
-            <p className="max-w-sm text-sm text-muted-foreground">
-              Add a custom stream or save working streams from the Stream
-              Tester to build your library.
+        <div className="saved-empty-card">
+            <p className="saved-empty-card__label">Empty library</p>
+            <div className="saved-empty-card__title">
+              <div className="saved-empty-card__title-item">
+                <span>NO</span>
+                <span className="saved-empty-card__glitch" aria-hidden>
+                  NO
+                </span>
+                <span
+                  className="saved-empty-card__glitch saved-empty-card__glitch--secondary"
+                  aria-hidden
+                >
+                  NO
+                </span>
+              </div>
+              <div className="saved-empty-card__title-item">
+                <span>STREAMS</span>
+                <span className="saved-empty-card__glitch" aria-hidden>
+                  STREAMS
+                </span>
+                <span
+                  className="saved-empty-card__glitch saved-empty-card__glitch--secondary"
+                  aria-hidden
+                >
+                  STREAMS
+                </span>
+              </div>
+            </div>
+            <p className="saved-empty-card__description">
+              Add a custom stream or save working streams from the Stream Tester
+              to build your library.
             </p>
-            <Button variant="gradient" onClick={() => setAddOpen(true)}>
+            <Button
+              variant="gradient"
+              className="saved-empty-card__button"
+              onClick={() => setAddOpen(true)}
+            >
               <Plus className="h-4 w-4" /> Add your first stream
             </Button>
-          </CardContent>
-        </Card>
+        </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {streams.map((stream) => (
