@@ -17,6 +17,8 @@ interface StationSwitcherProps {
   savedStations?: Station[];
   currentStationId: string | null;
   onSelect: (station: Station) => void;
+  hideLabel?: boolean;
+  triggerClassName?: string;
 }
 
 export function StationSwitcher({
@@ -24,6 +26,8 @@ export function StationSwitcher({
   savedStations = [],
   currentStationId,
   onSelect,
+  hideLabel = false,
+  triggerClassName,
 }: StationSwitcherProps) {
   function handleChange(id: string) {
     const all = [...stations, ...savedStations];
@@ -33,11 +37,13 @@ export function StationSwitcher({
 
   return (
     <div className="space-y-2">
-      <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        <Radio className="h-3.5 w-3.5" /> Station
-      </label>
+      {!hideLabel && (
+        <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <Radio className="h-3.5 w-3.5" /> Station
+        </label>
+      )}
       <Select value={currentStationId ?? undefined} onValueChange={handleChange}>
-        <SelectTrigger>
+        <SelectTrigger className={triggerClassName}>
           <SelectValue placeholder="Choose a station…" />
         </SelectTrigger>
         <SelectContent>

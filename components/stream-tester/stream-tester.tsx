@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   BookmarkPlus,
-  CheckCircle2,
   Loader2,
   PlayCircle,
   XCircle,
@@ -11,10 +10,8 @@ import {
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { streamService } from "@/services/stream-service";
 import type { StreamTestResult } from "@/types";
 import { cn } from "@/lib/utils";
@@ -70,8 +67,10 @@ export function StreamTester() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-3">
-      <Card className="lg:col-span-2">
-        <CardContent className="space-y-5 pt-6">
+      <div className="stream-tester-card lg:col-span-2">
+        <div className="stream-tester-card__border" aria-hidden />
+        <div className="stream-tester-card__inner">
+          <div className="stream-tester-card__content">
           <div className="space-y-2">
             <Label htmlFor="stream-url">Stream URL</Label>
             <div className="flex flex-col gap-2 sm:flex-row">
@@ -81,12 +80,12 @@ export function StreamTester() {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && runTest()}
+                className="border-white/10 bg-black/25"
               />
               <Button
-                variant="gradient"
                 onClick={runTest}
                 disabled={testing}
-                className="sm:w-36"
+                className="stream-tester-card__submit sm:w-36"
               >
                 {testing ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -96,7 +95,7 @@ export function StreamTester() {
                 Test stream
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-[hsl(0,0%,83%)]">
               We check whether the URL loads, plays, and can be processed by Web
               Audio (required for delay).
             </p>
@@ -104,8 +103,8 @@ export function StreamTester() {
 
           {result && (
             <>
-              <Separator />
-              <div className="space-y-3">
+              <hr className="stream-tester-card__line" />
+              <ul className="stream-tester-card__list">
                 <CheckRow ok={result.canLoad} label="URL loads" />
                 <CheckRow ok={result.canPlay} label="Audio can play" />
                 <CheckRow
@@ -117,7 +116,7 @@ export function StreamTester() {
                   label="CORS allows processing"
                   warnIfFalse
                 />
-              </div>
+              </ul>
 
               <div
                 className={cn(
@@ -133,7 +132,7 @@ export function StreamTester() {
               </div>
 
               {result.canPlay && (
-                <div className="space-y-2 rounded-lg border bg-muted/30 p-4">
+                <div className="space-y-2 rounded-lg border border-white/10 bg-black/20 p-4">
                   <Label htmlFor="stream-name">Save this stream</Label>
                   <div className="flex flex-col gap-2 sm:flex-row">
                     <Input
@@ -141,12 +140,13 @@ export function StreamTester() {
                       placeholder="Station name (e.g. KSL 1160 AM)"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                      className="border-white/10 bg-black/25"
                     />
                     <Button
                       variant="outline"
                       onClick={saveStream}
                       disabled={saving}
-                      className="sm:w-36"
+                      className="border-white/15 bg-transparent sm:w-36 hover:bg-white/10"
                     >
                       <BookmarkPlus className="h-4 w-4" /> Save
                     </Button>
@@ -155,31 +155,34 @@ export function StreamTester() {
               )}
             </>
           )}
-        </CardContent>
-      </Card>
+          </div>
+        </div>
+      </div>
 
-      <Card>
-        <CardContent className="space-y-3 pt-6">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Try an example
-          </p>
+      <div className="stream-examples-card">
+        <div className="stream-examples-card__header">
+          <p>Try an example</p>
+        </div>
+        <div className="stream-examples-card__content">
           {EXAMPLES.map((ex) => (
-            <button
-              key={ex.url}
-              type="button"
-              onClick={() => {
-                setUrl(ex.url);
-                setName(ex.name);
-                setResult(null);
-              }}
-              className="w-full rounded-lg border p-3 text-left transition-colors hover:border-primary/50 hover:bg-accent"
-            >
-              <p className="text-sm font-semibold">{ex.name}</p>
-              <p className="truncate text-xs text-muted-foreground">{ex.url}</p>
-            </button>
+            <div key={ex.url} className="stream-examples-card__example">
+              <p className="stream-examples-card__example-title">{ex.name}</p>
+              <p className="stream-examples-card__example-url">{ex.url}</p>
+              <button
+                type="button"
+                className="stream-examples-card__btn"
+                onClick={() => {
+                  setUrl(ex.url);
+                  setName(ex.name);
+                  setResult(null);
+                }}
+              >
+                Use this stream
+              </button>
+            </div>
           ))}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
@@ -194,18 +197,33 @@ function CheckRow({
   warnIfFalse?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-3 text-sm">
-      {ok ? (
-        <CheckCircle2 className="h-5 w-5 text-success" />
-      ) : (
-        <XCircle
-          className={cn(
-            "h-5 w-5",
-            warnIfFalse ? "text-warning" : "text-destructive"
-          )}
-        />
-      )}
-      <span className={ok ? "" : "text-muted-foreground"}>{label}</span>
-    </div>
+    <li className="stream-tester-card__list-item">
+      <span
+        className={cn(
+          "stream-tester-card__check",
+          ok
+            ? "stream-tester-card__check--ok"
+            : warnIfFalse
+              ? "stream-tester-card__check--warn"
+              : "stream-tester-card__check--fail"
+        )}
+      >
+        {ok ? (
+          <svg className="stream-tester-card__check-svg" viewBox="0 0 16 16" aria-hidden>
+            <path d="M6.2 11.2 3.4 8.4l-1 1 3.8 3.8 7.4-7.4-1-1z" />
+          </svg>
+        ) : (
+          <XCircle className="h-3 w-3" />
+        )}
+      </span>
+      <span
+        className={cn(
+          "stream-tester-card__list-text",
+          !ok && "opacity-70"
+        )}
+      >
+        {label}
+      </span>
+    </li>
   );
 }

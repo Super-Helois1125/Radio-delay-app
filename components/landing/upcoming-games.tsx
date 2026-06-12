@@ -1,9 +1,7 @@
 "use client";
 
-import { CalendarDays, Tv } from "lucide-react";
+import { Radio } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { formatGameDate, formatGameTime } from "@/lib/utils";
 import { scheduleService } from "@/services/schedule-service";
 
@@ -11,31 +9,56 @@ export function UpcomingGames() {
   const games = scheduleService.upcomingGames();
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <div className="upcoming-games-grid grid gap-4 md:grid-cols-3">
       {games.map((game) => {
         const team = scheduleService.getTeam(game.teamId);
+        const gameDay = new Date(game.startTime).getDate();
+        const matchup = `${team?.shortName ?? "TBD"} ${
+          game.homeAway === "home" ? "vs" : "@"
+        } ${game.opponent}`;
+
         return (
-          <Card key={game.id} className="intense-card hover:-translate-y-1 hover:shadow-brand">
-            <CardContent className="relative z-[1] space-y-3 p-5">
-              <div className="flex items-center justify-between">
-                <Badge variant="secondary">{team?.league}</Badge>
-                <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <Tv className="h-3.5 w-3.5" /> {game.network}
-                </span>
+          <div key={game.id} className="game-ticket-wrapper">
+            <article className="game-ticket">
+              <div className="game-ticket__main">
+                <div className="game-ticket__content">
+                  <div className="game-ticket__header">
+                    <div className="game-ticket__logo">
+                      <Radio aria-hidden />
+                      <span>{team?.league ?? "Game"}</span>
+                    </div>
+                    <span className="game-ticket__type">{game.network}</span>
+                  </div>
+                  <h3 className="game-ticket__title">{matchup}</h3>
+                  <p className="game-ticket__subtitle">
+                    {formatGameDate(game.startTime)} ·{" "}
+                    {formatGameTime(game.startTime)} ET
+                  </p>
+                  <div className="game-ticket__details">
+                    <div className="game-ticket__detail-item">
+                      <span className="game-ticket__label">Broadcast</span>
+                      <span className="game-ticket__value">{game.network}</span>
+                    </div>
+                    <div className="game-ticket__detail-item">
+                      <span className="game-ticket__label">Side</span>
+                      <span className="game-ticket__value">
+                        {game.homeAway === "home" ? "Home" : "Away"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-lg font-bold">
-                {team?.shortName}{" "}
-                <span className="text-muted-foreground">
-                  {game.homeAway === "home" ? "vs" : "@"}
-                </span>{" "}
-                {game.opponent}
-              </h3>
-              <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CalendarDays className="h-4 w-4 text-primary" />
-                {formatGameDate(game.startTime)} · {formatGameTime(game.startTime)} ET
-              </p>
-            </CardContent>
-          </Card>
+              <div className="game-ticket__perforation" aria-hidden>
+                <div className="game-ticket__perf-line" />
+              </div>
+              <div className="game-ticket__stub">
+                <div className="game-ticket__admit">
+                  <span className="game-ticket__admit-text">Game day</span>
+                  <span className="game-ticket__admit-num">{gameDay}</span>
+                </div>
+              </div>
+            </article>
+          </div>
         );
       })}
     </div>

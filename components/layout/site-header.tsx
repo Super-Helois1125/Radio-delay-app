@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogOut, Menu, Radio, X } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
 import { cn } from "@/lib/utils";
 
@@ -43,21 +42,20 @@ export function SiteHeader() {
         {/* Centered pill navbar */}
         <div
           className={cn(
-            "flex h-[3.75rem] items-center justify-between rounded-full border px-3 sm:px-5 transition-all duration-300",
-            "glass border-primary/15",
-            scrolled && "shadow-neon"
+            "site-header-pill flex h-[3.75rem] items-center justify-between transition-all duration-300",
+            scrolled && "site-header-pill--scrolled"
           )}
         >
-          <Link href="/" className="flex shrink-0 items-center gap-2">
+          <Link href="/" className="site-header-pill__brand flex shrink-0 items-center gap-2">
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-gradient text-white shadow-brand sm:h-10 sm:w-10">
               <Radio className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>
-            <span className="hidden text-lg font-extrabold tracking-tight sm:inline sm:text-xl">
-              Play<span className="brand-gradient-text">Delay</span>
+            <span className="hidden text-lg font-extrabold tracking-tight text-white sm:inline sm:text-xl">
+              Play<span className="text-white/90">Delay</span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-0.5 lg:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => {
               const active =
                 link.href === "/"
@@ -68,60 +66,49 @@ export function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "rounded-full px-3.5 py-2 text-sm font-semibold transition-all xl:px-4",
-                    active
-                      ? "bg-primary/10 text-primary"
-                      : "text-foreground/65 hover:bg-primary/10 hover:text-primary"
+                    "site-header-pill__link",
+                    active && "site-header-pill__link--active"
                   )}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
                 </Link>
               );
             })}
           </nav>
 
-          <div className="hidden items-center gap-1.5 lg:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {user ? (
               <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="rounded-full hover:bg-primary/10"
-                  asChild
-                >
-                  <Link href="/account">Account</Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full border-primary/25 bg-transparent backdrop-blur-sm hover:border-primary/40 hover:bg-primary/10"
+                <Link href="/account" className="site-header-pill__link">
+                  <span>Account</span>
+                </Link>
+                <button
+                  type="button"
+                  className="site-header-pill__link site-header-pill__link--outline"
                   onClick={handleSignOut}
                 >
-                  <LogOut className="h-4 w-4" /> Sign out
-                </Button>
+                  <LogOut className="h-4 w-4" />
+                  <span>Sign out</span>
+                </button>
               </>
             ) : (
               <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="rounded-full hover:bg-primary/10"
-                  asChild
+                <Link href="/login" className="site-header-pill__link">
+                  <span>Log in</span>
+                </Link>
+                <Link
+                  href={configured ? "/signup" : "/player"}
+                  className="site-header-pill__link site-header-pill__link--cta"
                 >
-                  <Link href="/login">Log in</Link>
-                </Button>
-                <Button variant="gradient" size="sm" className="rounded-full" asChild>
-                  <Link href={configured ? "/signup" : "/player"}>
-                    {configured ? "Get started" : "Open player"}
-                  </Link>
-                </Button>
+                  <span>{configured ? "Get started" : "Open player"}</span>
+                </Link>
               </>
             )}
           </div>
 
           <button
             type="button"
-            className="glass inline-flex h-9 w-9 items-center justify-center rounded-full lg:hidden"
+            className="site-header-pill__menu-btn inline-flex h-9 w-9 items-center justify-center rounded-full lg:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
           >
@@ -131,49 +118,65 @@ export function SiteHeader() {
 
         {/* Mobile menu — centered rounded panel below pill */}
         {open && (
-          <div className="glass mt-2 overflow-hidden rounded-3xl border border-primary/20 shadow-brand lg:hidden">
-            <nav className="flex flex-col gap-1 p-3">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-2xl px-4 py-2.5 text-sm font-semibold text-foreground/80 hover:bg-primary/10"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="mt-2 flex flex-col gap-2 border-t border-primary/15 pt-3">
+          <div className="site-header-pill site-header-pill--dropdown mt-2 overflow-hidden lg:hidden">
+            <nav className="flex flex-col gap-1 p-2">
+              {NAV_LINKS.map((link) => {
+                const active =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "site-header-pill__link site-header-pill__link--stack",
+                      active && "site-header-pill__link--active"
+                    )}
+                  >
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              })}
+              <div className="mt-1 flex flex-col gap-1 border-t border-white/15 pt-2">
                 {user ? (
                   <>
-                    <Button variant="ghost" className="rounded-full" asChild>
-                      <Link href="/account" onClick={() => setOpen(false)}>
-                        Account
-                      </Link>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="rounded-full"
-                      onClick={handleSignOut}
+                    <Link
+                      href="/account"
+                      onClick={() => setOpen(false)}
+                      className="site-header-pill__link site-header-pill__link--stack"
                     >
-                      <LogOut className="h-4 w-4" /> Sign out
-                    </Button>
+                      <span>Account</span>
+                    </Link>
+                    <button
+                      type="button"
+                      className="site-header-pill__link site-header-pill__link--stack site-header-pill__link--outline"
+                      onClick={() => {
+                        setOpen(false);
+                        handleSignOut();
+                      }}
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span>Sign out</span>
+                    </button>
                   </>
                 ) : (
                   <>
-                    <Button variant="ghost" className="rounded-full" asChild>
-                      <Link href="/login" onClick={() => setOpen(false)}>
-                        Log in
-                      </Link>
-                    </Button>
-                    <Button variant="gradient" className="rounded-full" asChild>
-                      <Link
-                        href={configured ? "/signup" : "/player"}
-                        onClick={() => setOpen(false)}
-                      >
-                        {configured ? "Get started" : "Open player"}
-                      </Link>
-                    </Button>
+                    <Link
+                      href="/login"
+                      onClick={() => setOpen(false)}
+                      className="site-header-pill__link site-header-pill__link--stack"
+                    >
+                      <span>Log in</span>
+                    </Link>
+                    <Link
+                      href={configured ? "/signup" : "/player"}
+                      onClick={() => setOpen(false)}
+                      className="site-header-pill__link site-header-pill__link--stack site-header-pill__link--cta"
+                    >
+                      <span>{configured ? "Get started" : "Open player"}</span>
+                    </Link>
                   </>
                 )}
               </div>

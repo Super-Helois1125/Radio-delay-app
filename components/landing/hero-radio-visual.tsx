@@ -92,20 +92,25 @@ export function HeroRadioVisual() {
             {item.variant === "presets" && (
               <div className="hero-presets-card">
                 <span className="hero-presets-card__title">Presets</span>
-                <div className="hero-presets-card__list">
+                <ul className="hero-presets-card__list">
                   {PRESETS.map((p, i) => (
-                    <button
+                    <li
                       key={p}
-                      type="button"
                       className={cn(
-                        "hero-presets-card__element",
-                        i === 2 && "hero-presets-card__element--active"
+                        "hero-presets-card__iso",
+                        i === 2 && "hero-presets-card__iso--active"
                       )}
                     >
-                      {p}
-                    </button>
+                      <button type="button" className="hero-presets-card__item">
+                        <span className="hero-presets-card__orbit" aria-hidden />
+                        <span className="hero-presets-card__orbit" aria-hidden />
+                        <span className="hero-presets-card__orbit" aria-hidden />
+                        <span className="hero-presets-card__icon">{p}</span>
+                        <span className="hero-presets-card__text">{p}</span>
+                      </button>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             )}
           </div>

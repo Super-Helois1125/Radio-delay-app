@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BookmarkPlus, Keyboard, Pause, Play } from "lucide-react";
+import { BookmarkPlus, Keyboard, Pause, Play, Radio } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -211,24 +211,59 @@ export function PlayerShell() {
 
       {/* Sidebar */}
       <div className="space-y-6">
-        <Card className="glass-card">
-          <CardContent className="space-y-4 pt-6">
+        <div className="player-station-card">
+          <div className="player-station-card__top">
+            <div className="player-station-card__border" aria-hidden />
+            <div className="player-station-card__icons">
+              <div className="player-station-card__logo">
+                <Radio aria-hidden />
+              </div>
+              <span className="player-station-card__top-label">Station</span>
+            </div>
+          </div>
+          <div className="player-station-card__bottom">
+            <span className="player-station-card__title">
+              {station?.name ?? "Choose a station"}
+            </span>
+            <div className="player-station-card__row">
+              <div className="player-station-card__item">
+                <span className="player-station-card__big-text">
+                  {station?.frequency ?? "—"}
+                </span>
+                <span className="player-station-card__regular-text">Band</span>
+              </div>
+              <div className="player-station-card__item">
+                <span className="player-station-card__big-text">
+                  {station?.market?.split(",")[0] ?? "—"}
+                </span>
+                <span className="player-station-card__regular-text">Market</span>
+              </div>
+              <div className="player-station-card__item">
+                <span className="player-station-card__big-text">
+                  {isPlaying ? "Live" : "Ready"}
+                </span>
+                <span className="player-station-card__regular-text">Status</span>
+              </div>
+            </div>
             <StationSwitcher
               stations={STATIONS}
               savedStations={savedStations}
               currentStationId={station?.id ?? null}
               onSelect={handleSelectStation}
+              hideLabel
+              triggerClassName="player-station-card__select"
             />
-            <Button
-              variant="outline"
-              className="w-full"
+            <button
+              type="button"
+              className="player-station-card__save"
               disabled={!hasStation || saving}
               onClick={handleSaveCurrent}
             >
-              <BookmarkPlus className="h-4 w-4" /> Save current stream
-            </Button>
-          </CardContent>
-        </Card>
+              <BookmarkPlus className="h-4 w-4" />
+              Save current stream
+            </button>
+          </div>
+        </div>
 
         <Card className="glass-card">
           <CardContent className="pt-6">

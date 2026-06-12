@@ -4,6 +4,7 @@ import { Gauge, SlidersHorizontal, TestTube2, Tv, type LucideIcon } from "lucide
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ShowcaseCard } from "@/components/landing/showcase-card";
+import { cn } from "@/lib/utils";
 
 type ShowcaseItem = {
   title: string;
@@ -50,54 +51,30 @@ const SHOWCASE: ShowcaseItem[] = [
 ];
 
 export function ShowcaseStaggerGrid() {
-  const left = SHOWCASE.filter((_, index) => index % 2 === 0);
-  const right = SHOWCASE.filter((_, index) => index % 2 === 1);
-
   return (
     <div className="showcase-zigzag mt-16">
-      <div className="showcase-zigzag__col showcase-zigzag__col--left">
-        {left.map((item, index) => (
-          <ScrollReveal
-            key={item.title}
-            variant="fade-left"
-            delay={index * 120}
-            className="showcase-zigzag__item"
-          >
-            <ShowcaseCard
-              badge={item.badge}
-              icon={item.icon}
-              title={item.title}
-              description={item.text}
-              href={item.href}
-              secondaryHref={item.secondaryHref}
-              linkLabel="Learn more"
-              secondaryLabel="Open player"
-            />
-          </ScrollReveal>
-        ))}
-      </div>
-
-      <div className="showcase-zigzag__col showcase-zigzag__col--right">
-        {right.map((item, index) => (
-          <ScrollReveal
-            key={item.title}
-            variant="fade-right"
-            delay={index * 120 + 80}
-            className="showcase-zigzag__item"
-          >
-            <ShowcaseCard
-              badge={item.badge}
-              icon={item.icon}
-              title={item.title}
-              description={item.text}
-              href={item.href}
-              secondaryHref={item.secondaryHref}
-              linkLabel="Learn more"
-              secondaryLabel="Open player"
-            />
-          </ScrollReveal>
-        ))}
-      </div>
+      {SHOWCASE.map((item, index) => (
+        <ScrollReveal
+          key={item.title}
+          variant={index % 2 === 0 ? "fade-left" : "fade-right"}
+          delay={index * 120}
+          className={cn(
+            "showcase-zigzag__item",
+            `showcase-zigzag__item--${index}`
+          )}
+        >
+          <ShowcaseCard
+            badge={item.badge}
+            icon={item.icon}
+            title={item.title}
+            description={item.text}
+            href={item.href}
+            secondaryHref={item.secondaryHref}
+            linkLabel="Learn more"
+            secondaryLabel="Open player"
+          />
+        </ScrollReveal>
+      ))}
     </div>
   );
 }
