@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Play, Radio, Sparkles, Tv, Waves, Zap } from "lucide-react";
+import { ArrowRight, Keyboard, Play, Radio, Tv, Waves, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -21,19 +21,14 @@ export function HeroContent() {
   return (
     <div className="hero-left-stage hero-left-zone">
       <div className="hero-pong hero-left-pong hero-left-stack">
-        <div className="hero-orbit-pill hero-orbit-pill--glass hero-left-badge inline-flex flex-row items-center gap-2 !rounded-full !px-3 !py-1.5">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-gradient text-white shadow-brand">
-            <Radio className="h-3 w-3" />
+        <div className="hero-orbit-pill hero-orbit-pill--glass hero-left-badge">
+          <span className="hero-left-badge__icon bg-brand-gradient">
+            <Radio className="hero-left-badge__icon-svg" />
           </span>
-          <span className="text-left">
-            <span className="block text-[9px] font-bold uppercase tracking-widest text-primary">
-              PlayDelay
-            </span>
-            <span className="block text-[11px] font-semibold text-foreground/80">
-              Sports audio-sync
-            </span>
+          <span className="hero-left-badge__text">
+            <span className="hero-left-badge__label brand-gradient-text">PlayDelay</span>
+            <span className="hero-left-badge__sub">Sports audio-sync</span>
           </span>
-          <Sparkles className="ml-0.5 h-3.5 w-3.5 text-primary/60" />
         </div>
 
         <h1 className="hero-left-title">
@@ -50,19 +45,14 @@ export function HeroContent() {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="hero-left-stats">
           {STATS.map((stat) => (
-            <div
-              key={stat.label}
-              className="hero-orbit-pill hero-orbit-pill--glass hero-left-stat !min-w-[4.5rem] !px-3 !py-2"
-            >
-              <stat.icon className="mb-0.5 h-3.5 w-3.5 text-primary" />
-              <span className="text-xs font-extrabold text-foreground">
-                {stat.label}
+            <div key={stat.label} className="hero-left-stat">
+              <span className="hero-left-stat__icon-wrap">
+                <stat.icon className="hero-left-stat__icon" />
               </span>
-              <span className="text-[9px] font-semibold uppercase tracking-wide text-muted-foreground">
-                {stat.sub}
-              </span>
+              <span className="hero-left-stat__label">{stat.label}</span>
+              <span className="hero-left-stat__sub">{stat.sub}</span>
             </div>
           ))}
         </div>
@@ -90,14 +80,14 @@ export function HeroContent() {
           </Button>
         </div>
 
-        <div className="hidden flex-wrap items-center gap-2 sm:flex">
-          <span className="mr-0.5 text-[9px] font-bold uppercase tracking-widest text-muted-foreground">
-            Shortcuts
-          </span>
+        <div className="hero-left-shortcuts-pill">
+          <Keyboard className="hero-left-shortcuts-pill__icon" />
+          <span className="hero-left-shortcuts-pill__label">Shortcuts</span>
+          <span className="hero-left-shortcuts-pill__divider" aria-hidden />
           {SHORTCUTS.map((s) => (
-            <span key={s.key} className="hero-shortcut-chip">
-              <kbd className="hero-shortcut-key">{s.key}</kbd>
-              <span>{s.action}</span>
+            <span key={s.key} className="hero-left-shortcuts-pill__item">
+              <kbd className="hero-left-shortcuts-pill__key">{s.key}</kbd>
+              {s.action}
             </span>
           ))}
         </div>
