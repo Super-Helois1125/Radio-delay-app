@@ -10,12 +10,14 @@ type ShowcaseItem = {
   text: string;
   href: string;
   secondaryHref?: string;
+  badge: string;
   icon: LucideIcon;
 };
 
 const SHOWCASE: ShowcaseItem[] = [
   {
     icon: SlidersHorizontal,
+    badge: "Delay",
     title: "Precise 0–120s delay",
     text: "Shift radio audio in 1-, 10-, or 60-second steps, or jump to a preset. Changes apply smoothly with no clicks.",
     href: "/player",
@@ -23,6 +25,7 @@ const SHOWCASE: ShowcaseItem[] = [
   },
   {
     icon: Gauge,
+    badge: "Engine",
     title: "Ring-buffer audio engine",
     text: "A Web Audio AudioWorklet ring buffer delivers low-latency, sample-accurate delay that ramps gracefully in real time.",
     href: "/player",
@@ -30,6 +33,7 @@ const SHOWCASE: ShowcaseItem[] = [
   },
   {
     icon: Tv,
+    badge: "Sync",
     title: "Radio ahead or behind your TV?",
     text: "Tell us how the radio compares to your broadcast and we guide you to the exact fix — delay the audio, or delay the video.",
     href: "/player",
@@ -37,6 +41,7 @@ const SHOWCASE: ShowcaseItem[] = [
   },
   {
     icon: TestTube2,
+    badge: "Test",
     title: "Stream tester",
     text: "Paste any stream URL to verify it loads, plays, and supports processing before you rely on it for game day.",
     href: "/stream-tester",
@@ -59,7 +64,7 @@ export function ShowcaseStaggerGrid() {
             className="showcase-zigzag__item"
           >
             <ShowcaseCard
-              compact
+              badge={item.badge}
               icon={item.icon}
               title={item.title}
               description={item.text}
@@ -81,7 +86,7 @@ export function ShowcaseStaggerGrid() {
             className="showcase-zigzag__item"
           >
             <ShowcaseCard
-              compact
+              badge={item.badge}
               icon={item.icon}
               title={item.title}
               description={item.text}

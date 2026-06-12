@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { HowItWorksStepCard } from "@/components/landing/how-it-works-step-card";
 import { HeroContent } from "@/components/landing/hero-content";
 import { HeroRadioVisual } from "@/components/landing/hero-radio-visual";
 import { ShowcaseStaggerGrid } from "@/components/landing/showcase-stagger-grid";
@@ -86,15 +87,11 @@ export default function HomePage() {
           <div className="mt-16 grid w-full gap-6 md:grid-cols-3">
             {STEPS.map((s, i) => (
               <ScrollReveal key={s.n} variant="scale" delay={i * 120}>
-                <div className="intense-card h-full p-8 hover:-translate-y-1 hover:shadow-brand">
-                  <span className="text-5xl font-extrabold text-primary/45">
-                    {s.n}
-                  </span>
-                  <h3 className="mt-3 text-xl font-bold">{s.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {s.text}
-                  </p>
-                </div>
+                <HowItWorksStepCard
+                  step={s.n}
+                  title={s.title}
+                  description={s.text}
+                />
               </ScrollReveal>
             ))}
           </div>

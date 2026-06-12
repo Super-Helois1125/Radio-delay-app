@@ -11,10 +11,10 @@ type ShowcaseCardProps = {
   linkLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
+  badge?: string;
   icon?: LucideIcon;
   imageSrc?: string;
   imageAlt?: string;
-  compact?: boolean;
   className?: string;
 };
 
@@ -25,61 +25,60 @@ export function ShowcaseCard({
   linkLabel = "Learn more",
   secondaryHref,
   secondaryLabel = "Open player",
+  badge = "Feature",
   icon: Icon,
   imageSrc,
   imageAlt,
-  compact = false,
   className,
 }: ShowcaseCardProps) {
   const hasImage = Boolean(imageSrc);
 
   return (
-    <article
-      className={cn("showcase-card group", compact && "showcase-card--compact", className)}
-    >
-      <div className={cn("showcase-card__media", hasImage && "showcase-card__media--photo")}>
-        <div
-          className={cn(
-            "showcase-card__media-inner",
-            hasImage && "showcase-card__media-inner--photo"
-          )}
-        >
-          {hasImage ? (
+    <article className={cn("showcase-card group", className)}>
+      <div className="showcase-card__header">
+        {hasImage ? (
+          <span className="showcase-card__icon showcase-card__icon--image">
             <Image
               src={imageSrc!}
               alt={imageAlt ?? title}
               fill
-              className="showcase-card__media-image"
-              sizes="(max-width: 768px) 90vw, 480px"
+              className="showcase-card__icon-image"
+              sizes="96px"
             />
-          ) : (
-            Icon && (
-              <span className="showcase-card__icon">
-                <Icon className="h-10 w-10" strokeWidth={1.5} />
-              </span>
-            )
-          )}
-          {!hasImage && <div className="showcase-card__media-glow" aria-hidden />}
-        </div>
+          </span>
+        ) : (
+          Icon && (
+            <span className="showcase-card__icon">
+              <Icon className="showcase-card__icon-svg" strokeWidth={1.75} />
+            </span>
+          )
+        )}
+        <span className="showcase-card__badge">{badge}</span>
       </div>
 
-      <div className="showcase-card__body">
+      <div className="showcase-card__content">
         <h3 className="showcase-card__title">{title}</h3>
-        <div className="showcase-card__details">
-          <p className="showcase-card__description">{description}</p>
-          <div className="showcase-card__links">
-            <Link href={href} className="showcase-card__link">
-              {linkLabel}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            {secondaryHref && (
-              <Link href={secondaryHref} className="showcase-card__link">
-                {secondaryLabel}
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            )}
-          </div>
-        </div>
+        <p className="showcase-card__desc">{description}</p>
+      </div>
+
+      <div className="showcase-card__footer">
+        <Link href={href} className="showcase-card__btn showcase-card__btn--primary">
+          <span className="showcase-card__btn-icon">
+            <ArrowRight className="h-4 w-4" />
+          </span>
+          {linkLabel}
+        </Link>
+        {secondaryHref && (
+          <Link
+            href={secondaryHref}
+            className="showcase-card__btn showcase-card__btn--secondary"
+          >
+            <span className="showcase-card__btn-icon">
+              <ArrowUpRight className="h-4 w-4" />
+            </span>
+            {secondaryLabel}
+          </Link>
+        )}
       </div>
     </article>
   );
