@@ -1,12 +1,19 @@
 "use client";
 
-import { Gauge, SlidersHorizontal, TestTube2, Tv } from "lucide-react";
+import { Gauge, SlidersHorizontal, TestTube2, Tv, type LucideIcon } from "lucide-react";
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ShowcaseCard } from "@/components/landing/showcase-card";
-import { cn } from "@/lib/utils";
 
-const SHOWCASE = [
+type ShowcaseItem = {
+  title: string;
+  text: string;
+  href: string;
+  secondaryHref?: string;
+  icon: LucideIcon;
+};
+
+const SHOWCASE: ShowcaseItem[] = [
   {
     icon: SlidersHorizontal,
     title: "Precise 0–120s delay",
@@ -35,22 +42,21 @@ const SHOWCASE = [
     href: "/stream-tester",
     secondaryHref: "/player",
   },
-] as const;
+];
 
 export function ShowcaseStaggerGrid() {
+  const left = SHOWCASE.filter((_, index) => index % 2 === 0);
+  const right = SHOWCASE.filter((_, index) => index % 2 === 1);
+
   return (
     <div className="showcase-zigzag mt-16">
-      {SHOWCASE.map((item, index) => {
-        const alignLeft = index % 2 === 0;
-
-        return (
+      <div className="showcase-zigzag__col showcase-zigzag__col--left">
+        {left.map((item, index) => (
           <ScrollReveal
             key={item.title}
-            variant={alignLeft ? "fade-left" : "fade-right"}
-            className={cn(
-              "showcase-zigzag__item",
-              alignLeft ? "showcase-zigzag__item--left" : "showcase-zigzag__item--right"
-            )}
+            variant="fade-left"
+            delay={index * 120}
+            className="showcase-zigzag__item"
           >
             <ShowcaseCard
               compact
@@ -63,8 +69,30 @@ export function ShowcaseStaggerGrid() {
               secondaryLabel="Open player"
             />
           </ScrollReveal>
-        );
-      })}
+        ))}
+      </div>
+
+      <div className="showcase-zigzag__col showcase-zigzag__col--right">
+        {right.map((item, index) => (
+          <ScrollReveal
+            key={item.title}
+            variant="fade-right"
+            delay={index * 120 + 80}
+            className="showcase-zigzag__item"
+          >
+            <ShowcaseCard
+              compact
+              icon={item.icon}
+              title={item.title}
+              description={item.text}
+              href={item.href}
+              secondaryHref={item.secondaryHref}
+              linkLabel="Learn more"
+              secondaryLabel="Open player"
+            />
+          </ScrollReveal>
+        ))}
+      </div>
     </div>
   );
 }

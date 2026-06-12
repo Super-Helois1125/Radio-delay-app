@@ -61,7 +61,7 @@ export default function HomePage() {
       </section>
 
       {/* Showcase — reference-style stacked cards */}
-      <section className="page-section w-full">
+      <section className="page-section showcase-section w-full">
         <ScrollReveal className="mx-auto max-w-3xl text-center">
           <span className="eyebrow">Why PlayDelay</span>
           <h2 className="section-heading">
