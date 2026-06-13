@@ -17,6 +17,7 @@ import { useAudioEngine } from "@/hooks/use-audio-engine";
 import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
 import { STATIONS } from "@/lib/data";
 import { streamService } from "@/services/stream-service";
+import { usePlayerStore } from "@/store/player-store";
 import type { SavedStream, Station } from "@/types";
 
 export function PlayerShell() {
@@ -44,10 +45,23 @@ export function PlayerShell() {
   } = useAudioEngine();
 
   const [savedStations, setSavedStations] = useState<Station[]>([]);
+  const [savedStationsReady, setSavedStationsReady] = useState(false);
   const [saving, setSaving] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [storeHydrated, setStoreHydrated] = useState(false);
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (usePlayerStore.persist.hasHydrated()) {
+      setStoreHydrated(true);
+      return;
+    }
+
+    return usePlayerStore.persist.onFinishHydration(() => {
+      setStoreHydrated(true);
+    });
+  }, []);
 
   useKeyboardShortcuts({
     onMute: toggleMute,
@@ -65,7 +79,11 @@ export function PlayerShell() {
   }, [ready, station, ensureStationLoaded]);
 
   useEffect(() => {
-    streamService
+    void refreshSavedStations().finally(() => setSavedStationsReady(true));
+  }, []);
+
+  function refreshSavedStations() {
+    return streamService
       .list()
       .then((streams: SavedStream[]) =>
         setSavedStations(
@@ -78,23 +96,25 @@ export function PlayerShell() {
         )
       )
       .catch(() => setSavedStations([]));
-  }, []);
+  }
 
   const isPlaying = status === "playing";
   const hasStation = Boolean(station);
 
   function handleSelectStation(next: Station) {
-    loadStation(next);
+    void loadStation(next).catch(() => {
+      /* loadStation reports failures through the player store */
+    });
   }
 
   // Avoid hydration mismatch: the player reads persisted (client-only) state.
-  if (!mounted) {
+  if (!mounted || !storeHydrated || !savedStationsReady) {
     return (
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
         <div className="player-main-card lg:col-span-2">
           <div className="player-main-card__border" aria-hidden />
           <div className="player-main-card__inner">
-            <div className="player-main-card__content flex h-[520px] items-center justify-center text-sm text-muted-foreground">
+            <div className="player-main-card__content player-main-card__content--loading">
               Loading player…
             </div>
           </div>
@@ -117,6 +137,7 @@ export function PlayerShell() {
         streamUrl: station.streamUrl,
         stationId: station.id,
       });
+      await refreshSavedStations();
       toast.success(`Saved "${station.name}"`);
     } catch (err) {
       toast.error(
@@ -128,7 +149,7 @@ export function PlayerShell() {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
+    <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
       {/* Main player */}
       <div className="player-main-card lg:col-span-2">
         <div className="player-main-card__border" aria-hidden />
@@ -158,7 +179,7 @@ export function PlayerShell() {
 
           <Separator />
 
-          <div className="flex flex-col items-center gap-6 py-2">
+          <div className="player-main-card__hero">
             <DelayDisplay targetDelay={targetDelay} currentDelay={currentDelay} />
 
             <div className="flex items-center gap-4">
@@ -181,24 +202,24 @@ export function PlayerShell() {
 
           <Separator />
 
-          <DelayControls
-            targetDelay={targetDelay}
-            disabled={!processingEnabled || !hasStation}
-            onStep={stepDelay}
-            onPreset={setDelay}
-            onReset={resetDelay}
-          />
+          <div className="player-main-card__controls">
+            <DelayControls
+              targetDelay={targetDelay}
+              disabled={!processingEnabled || !hasStation}
+              onStep={stepDelay}
+              onPreset={setDelay}
+              onReset={resetDelay}
+            />
 
-          <Separator />
+            <VolumeControl
+              volume={volume}
+              muted={muted}
+              onVolumeChange={changeVolume}
+              onToggleMute={toggleMute}
+            />
+          </div>
 
-          <VolumeControl
-            volume={volume}
-            muted={muted}
-            onVolumeChange={changeVolume}
-            onToggleMute={toggleMute}
-          />
-
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="player-main-card__shortcuts flex items-center gap-2 text-xs text-muted-foreground">
             <Keyboard className="h-3.5 w-3.5" />
             Shortcuts: <kbd className="rounded bg-muted px-1.5">m</kbd> mute ·{" "}
             <kbd className="rounded bg-muted px-1.5">space</kbd> play/pause ·{" "}
@@ -248,6 +269,7 @@ export function PlayerShell() {
             <StationSwitcher
               stations={STATIONS}
               savedStations={savedStations}
+              currentStation={station}
               currentStationId={station?.id ?? null}
               onSelect={handleSelectStation}
               hideLabel
@@ -265,15 +287,12 @@ export function PlayerShell() {
           </div>
         </div>
 
-        <Card className="glass-card">
-          <CardContent className="pt-6">
-            <SyncGuidance
-              direction={syncDirection}
-              onChange={setSyncDirection}
-              processingEnabled={processingEnabled}
-            />
-          </CardContent>
-        </Card>
+        <SyncGuidance
+          direction={syncDirection}
+          onChange={setSyncDirection}
+          processingEnabled={processingEnabled}
+          targetDelay={targetDelay}
+        />
       </div>
     </div>
   );

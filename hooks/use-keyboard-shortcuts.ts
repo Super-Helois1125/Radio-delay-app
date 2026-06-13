@@ -23,7 +23,13 @@ export function useKeyboardShortcuts({
     function handler(e: KeyboardEvent) {
       const target = e.target as HTMLElement | null;
       const tag = target?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || target?.isContentEditable) {
+      if (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        tag === "SELECT" ||
+        target?.isContentEditable ||
+        target?.closest("[data-station-picker]")
+      ) {
         return;
       }
 

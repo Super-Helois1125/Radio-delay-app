@@ -13,9 +13,7 @@ export function UpcomingGames() {
       {games.map((game) => {
         const team = scheduleService.getTeam(game.teamId);
         const gameDay = new Date(game.startTime).getDate();
-        const matchup = `${team?.shortName ?? "TBD"} ${
-          game.homeAway === "home" ? "vs" : "@"
-        } ${game.opponent}`;
+        const matchup = `${team?.shortName ?? "TBD"} vs ${game.opponent}`;
 
         return (
           <div key={game.id} className="game-ticket-wrapper">

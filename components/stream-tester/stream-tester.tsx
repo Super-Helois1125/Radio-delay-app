@@ -66,7 +66,7 @@ export function StreamTester() {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
+    <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
       <div className="stream-tester-card lg:col-span-2">
         <div className="stream-tester-card__border" aria-hidden />
         <div className="stream-tester-card__inner">
@@ -95,14 +95,14 @@ export function StreamTester() {
                 Test stream
               </Button>
             </div>
-            <p className="text-xs text-[hsl(0,0%,83%)]">
+            <p className="stream-tester-card__hint text-xs text-[hsl(0,0%,83%)]">
               We check whether the URL loads, plays, and can be processed by Web
               Audio (required for delay).
             </p>
           </div>
 
-          {result && (
-            <>
+          {result ? (
+            <div className="stream-tester-card__results">
               <hr className="stream-tester-card__line" />
               <ul className="stream-tester-card__list">
                 <CheckRow ok={result.canLoad} label="URL loads" />
@@ -153,7 +153,17 @@ export function StreamTester() {
                   </div>
                 </div>
               )}
-            </>
+            </div>
+          ) : (
+            <div className="stream-tester-card__empty">
+              <p className="stream-tester-card__empty-title">
+                Ready to test a stream
+              </p>
+              <p className="stream-tester-card__empty-text">
+                Paste a URL above or pick an example from the sidebar. Results
+                will show up here after you run a test.
+              </p>
+            </div>
           )}
           </div>
         </div>
