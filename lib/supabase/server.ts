@@ -8,13 +8,7 @@ import {
   isSupabaseConfigured,
 } from "./config";
 
-/**
- * Server-side Supabase client bound to the request cookies.
- * Returns `null` when Supabase is not configured.
- */
-export async function createClient() {
-  if (!isSupabaseConfigured) return null;
-
+async function buildServerClient() {
   const cookieStore = await cookies();
 
   return createServerClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -34,6 +28,17 @@ export async function createClient() {
       },
     },
   });
+}
+
+type ServerClient = Awaited<ReturnType<typeof buildServerClient>>;
+
+/**
+ * Server-side Supabase client bound to the request cookies.
+ * Returns `null` when Supabase is not configured.
+ */
+export async function createClient(): Promise<ServerClient | null> {
+  if (!isSupabaseConfigured) return null;
+  return buildServerClient();
 }
 
 /** Returns the authenticated user (or null). Never throws on missing config. */

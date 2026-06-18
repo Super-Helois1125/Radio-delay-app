@@ -14,7 +14,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       profiles: {
@@ -99,14 +99,27 @@ export interface Database {
         Relationships: [];
       };
     };
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
-    Enums: Record<string, never>;
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      [_ in never]: never;
+    };
+    Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
   };
-}
+};
 
 export type SavedStreamRow =
   Database["public"]["Tables"]["saved_streams"]["Row"];
+export type SavedStreamInsert =
+  Database["public"]["Tables"]["saved_streams"]["Insert"];
 export type UserPreferencesRow =
   Database["public"]["Tables"]["user_preferences"]["Row"];
+export type UserPreferencesInsert =
+  Database["public"]["Tables"]["user_preferences"]["Insert"];
 export type ProfileRow = Database["public"]["Tables"]["profiles"]["Row"];
