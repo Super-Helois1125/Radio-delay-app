@@ -39,6 +39,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       saved_streams: {
         Row: {
@@ -68,6 +69,7 @@ export interface Database {
           stream_url?: string;
           created_at?: string;
         };
+        Relationships: [];
       };
       user_preferences: {
         Row: {
@@ -94,6 +96,7 @@ export interface Database {
           theme?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
     };
     Views: Record<string, never>;
