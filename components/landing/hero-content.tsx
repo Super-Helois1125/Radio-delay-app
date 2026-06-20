@@ -26,20 +26,20 @@ export function HeroContent() {
             <Radio className="hero-left-badge__icon-svg" />
           </span>
           <span className="hero-left-badge__text">
-            <span className="hero-left-badge__label brand-gradient-text">PlayDelay</span>
+            <span className="hero-left-badge__label">PlayDelay</span>
             <span className="hero-left-badge__sub">Sports audio-sync</span>
           </span>
         </div>
 
         <h1 className="hero-left-title">
           Hear the game in{" "}
-          <span className="brand-gradient-text">perfect sync</span>
+          <span className="hero-title-accent">perfect sync</span>
           <br />
-          <span className="text-foreground/90">with your TV</span>
+          <span className="hero-left-title__line">with your TV</span>
         </h1>
 
         <div className="hero-left-glass-panel">
-          <p className="text-sm leading-relaxed text-foreground/75 lg:text-base">
+          <p>
             Delay your sports radio stream so the call lines up with your
             broadcast — no more hearing the touchdown before you see it.
           </p>

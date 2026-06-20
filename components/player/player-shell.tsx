@@ -114,6 +114,15 @@ export function PlayerShell() {
         <div className="player-main-card lg:col-span-2">
           <div className="player-main-card__border" aria-hidden />
           <div className="player-main-card__inner">
+            <div className="player-main-card__bg" aria-hidden>
+              <img
+                src="/assets/Images/hero1.jpg"
+                alt=""
+                className="player-main-card__bg-image"
+                width={1168}
+                height={784}
+              />
+            </div>
             <div className="player-main-card__content player-main-card__content--loading">
               Loading player…
             </div>
@@ -154,6 +163,15 @@ export function PlayerShell() {
       <div className="player-main-card lg:col-span-2">
         <div className="player-main-card__border" aria-hidden />
         <div className="player-main-card__inner">
+          <div className="player-main-card__bg" aria-hidden>
+            <img
+              src="/assets/Images/hero1.jpg"
+              alt=""
+              className="player-main-card__bg-image"
+              width={1168}
+              height={784}
+            />
+          </div>
           <div className="player-main-card__content">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="min-w-0">

@@ -31,15 +31,15 @@ export default function HomePage() {
       <section className="hero-section relative w-full">
         <div
           className="hero-section__bg pointer-events-none absolute"
-          style={{ backgroundImage: "url('/assets/hero/hero-bg.jpg')" }}
+          style={{ backgroundImage: "url('/assets/Images/hero.jpg')" }}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#000814]/92 via-[#000814]/75 to-[#000814]/40"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#000814]/78 via-[#000814]/42 to-[#000814]/18"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#000308]/55 via-transparent to-primary/10"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#000308]/35 via-transparent to-primary/5"
           aria-hidden
         />
         <div className="hero-inner relative py-4 md:py-6">
