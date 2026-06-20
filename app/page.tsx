@@ -29,19 +29,16 @@ export default function HomePage() {
     <>
       {/* Hero — one viewport, equal column gutters */}
       <section className="hero-section relative w-full">
-        <div
-          className="hero-section__bg pointer-events-none absolute"
-          style={{ backgroundImage: "url('/assets/Images/hero.jpg')" }}
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#000814]/78 via-[#000814]/42 to-[#000814]/18"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#000308]/35 via-transparent to-primary/5"
-          aria-hidden
-        />
+        <div className="hero-section__media" aria-hidden>
+          <img
+            src="/assets/Images/hero-image.jpg"
+            alt=""
+            width={1168}
+            height={784}
+            className="hero-section__image"
+          />
+        </div>
+        <div className="hero-section__overlay" aria-hidden />
         <div className="hero-inner relative py-4 md:py-6">
           <div className="hero-grid">
             <div className="hero-col hero-col--left">
