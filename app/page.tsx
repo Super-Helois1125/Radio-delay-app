@@ -38,7 +38,14 @@ export default function HomePage() {
             className="hero-section__image"
           />
         </div>
-        <div className="hero-section__overlay" aria-hidden />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#000814]/62 via-[#000814]/22 to-transparent"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#151521]/35 via-transparent to-transparent"
+          aria-hidden
+        />
         <div className="hero-inner relative py-4 md:py-6">
           <div className="hero-grid">
             <div className="hero-col hero-col--left">
