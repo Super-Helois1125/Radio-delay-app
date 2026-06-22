@@ -48,11 +48,17 @@ export function HeroContent() {
         <div className="hero-left-stats">
           {STATS.map((stat) => (
             <div key={stat.label} className="hero-left-stat">
-              <span className="hero-left-stat__icon-wrap">
-                <stat.icon className="hero-left-stat__icon" />
-              </span>
-              <span className="hero-left-stat__label">{stat.label}</span>
-              <span className="hero-left-stat__sub">{stat.sub}</span>
+              <div className="hero-left-stat__glow" aria-hidden>
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="hero-left-stat__content">
+                <stat.icon className="hero-left-stat__icon" aria-hidden />
+                <span className="hero-left-stat__label">{stat.label}</span>
+                <span className="hero-left-stat__sub">{stat.sub}</span>
+              </div>
             </div>
           ))}
         </div>

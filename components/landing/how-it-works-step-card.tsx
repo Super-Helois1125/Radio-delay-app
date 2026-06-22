@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import { ArrowRight, Radio } from "lucide-react";
 import Link from "next/link";
 
@@ -13,37 +12,28 @@ export function HowItWorksStepCard({
   title,
   description,
 }: HowItWorksStepCardProps) {
-  const titleLength = title.length;
-
   return (
-    <article
-      className="step-card-futuristic group h-full"
-      style={{ "--title-ch": titleLength } as CSSProperties}
-    >
-      <div className="step-card-futuristic__header">
-        <span className="step-card-futuristic__step" aria-hidden>
+    <article className="step-glass-card">
+      <div className="step-glass-card__content">
+        <span className="step-glass-card__step" aria-hidden>
           {step}
         </span>
-        <h3 className="step-card-futuristic__title">{title}</h3>
-        <p className="step-card-futuristic__desc">{description}</p>
+        <h3 className="step-glass-card__title">{title}</h3>
+        <p className="step-glass-card__desc">{description}</p>
       </div>
 
-      <div className="step-card-futuristic__footer">
-        <div className="step-card-futuristic__stats">
-          <span className="step-card-futuristic__stat">
-            <Radio className="step-card-futuristic__stat-icon" />
-            Step {step}
-          </span>
-        </div>
-        <div className="step-card-futuristic__actions">
-          <Link
-            href="/player"
-            className="step-card-futuristic__action"
-            aria-label={`Go to player — ${title}`}
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+      <div className="step-glass-card__footer">
+        <span className="step-glass-card__stat">
+          <Radio className="step-glass-card__stat-icon" aria-hidden />
+          Step {step}
+        </span>
+        <Link
+          href="/player"
+          className="step-glass-card__action"
+          aria-label={`Go to player — ${title}`}
+        >
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </article>
   );

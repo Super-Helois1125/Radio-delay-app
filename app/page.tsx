@@ -85,17 +85,18 @@ export default function HomePage() {
             <span className="eyebrow">How it works</span>
             <h2 className="section-heading">In sync in three steps</h2>
           </ScrollReveal>
-          <div className="mt-16 grid w-full gap-6 md:grid-cols-3">
-            {STEPS.map((s, i) => (
-              <ScrollReveal key={s.n} variant="scale" delay={i * 120}>
+          <ScrollReveal className="mt-16" variant="scale" delay={100}>
+            <div className="step-glass-fan">
+              {STEPS.map((s) => (
                 <HowItWorksStepCard
+                  key={s.n}
                   step={s.n}
                   title={s.title}
                   description={s.text}
                 />
-              </ScrollReveal>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
