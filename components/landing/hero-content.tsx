@@ -20,7 +20,7 @@ const SHORTCUTS = [
 export function HeroContent() {
   return (
     <div className="hero-left-stage hero-left-zone">
-      <div className="hero-pong hero-left-pong hero-left-stack">
+      <div className="hero-left-stack">
         <div className="hero-orbit-pill hero-orbit-pill--glass hero-left-badge">
           <span className="hero-left-badge__icon bg-brand-gradient">
             <Radio className="hero-left-badge__icon-svg" />

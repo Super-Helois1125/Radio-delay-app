@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import {
   BookmarkPlus,
+  Link2,
   Loader2,
   PlayCircle,
   XCircle,
@@ -21,6 +22,15 @@ const EXAMPLES = [
   { name: "620 AM The Buzz", url: "http://ais-sa8.cdnstream1.com/2751_64.aac" },
   { name: "ESPN Radio", url: "https://stream.revma.ihrhls.com/zc181" },
 ];
+
+const NEBULA_PARTICLES = [
+  { x: 0.2, y: -0.8 },
+  { x: -0.5, y: -0.4 },
+  { x: 0.7, y: 0.3 },
+  { x: -0.3, y: 0.9 },
+  { x: 0.9, y: -0.2 },
+  { x: -0.8, y: 0.5 },
+] as const;
 
 export function StreamTester() {
   const [url, setUrl] = useState("");
@@ -71,21 +81,53 @@ export function StreamTester() {
         <div className="stream-tester-card__border" aria-hidden />
         <div className="stream-tester-card__inner">
           <div className="stream-tester-card__content">
-          <div className="space-y-2">
-            <Label htmlFor="stream-url">Stream URL</Label>
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <Input
-                id="stream-url"
-                placeholder="https://example.com/stream.aac"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && runTest()}
-                className="border-white/10 bg-black/25"
-              />
-              <Button
+          <div className="stream-tester-nebula-form">
+            <div className="stream-tester-nebula-group">
+              <div
+                className={cn(
+                  "stream-tester-nebula-input",
+                  url.trim() && "stream-tester-nebula-input--filled"
+                )}
+              >
+                <input
+                  id="stream-url"
+                  type="url"
+                  className="stream-tester-nebula-input__field"
+                  placeholder=" "
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && runTest()}
+                  autoComplete="url"
+                />
+                <label
+                  htmlFor="stream-url"
+                  className="stream-tester-nebula-input__label"
+                >
+                  Stream URL
+                </label>
+                <Link2
+                  className="stream-tester-nebula-input__icon"
+                  aria-hidden
+                />
+                {NEBULA_PARTICLES.map((particle, index) => (
+                  <span
+                    key={index}
+                    className="stream-tester-nebula-input__particle"
+                    style={
+                      {
+                        "--x": particle.x,
+                        "--y": particle.y,
+                      } as CSSProperties
+                    }
+                    aria-hidden
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                className="stream-tester-nebula-button"
                 onClick={runTest}
                 disabled={testing}
-                className="stream-tester-card__submit sm:w-36"
               >
                 {testing ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -93,7 +135,7 @@ export function StreamTester() {
                   <PlayCircle className="h-4 w-4" />
                 )}
                 Test stream
-              </Button>
+              </button>
             </div>
             <p className="stream-tester-card__hint text-xs text-[hsl(0,0%,83%)]">
               We check whether the URL loads, plays, and can be processed by Web

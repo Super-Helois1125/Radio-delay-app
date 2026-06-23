@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogOut, Menu, Radio, X } from "lucide-react";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { useAppRouter } from "@/hooks/use-app-router";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -17,7 +18,7 @@ const NAV_LINKS = [
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useAppRouter();
   const { user, configured, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);

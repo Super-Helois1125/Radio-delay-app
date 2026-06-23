@@ -23,9 +23,10 @@ export function StreamStatus({
       <div className="flex flex-wrap items-center gap-2">
         <StatusBadge status={status} />
         {processingEnabled ? (
-          <Badge variant="secondary" className="gap-1">
-            <Wifi className="h-3 w-3" /> Delay engine active
-          </Badge>
+          <span className="player-shine-button" role="status">
+            <Wifi className="player-shine-button__icon" aria-hidden />
+            Delay engine active
+          </span>
         ) : (
           <Badge variant="warning" className="gap-1">
             <WifiOff className="h-3 w-3" /> Direct play (no delay)
@@ -69,7 +70,11 @@ function StatusBadge({ status }: { status: PlaybackStatus }) {
         </Badge>
       );
     case "paused":
-      return <Badge variant="outline">Paused</Badge>;
+      return (
+        <span className="player-paused-badge" role="status">
+          Paused
+        </span>
+      );
     case "error":
       return <Badge variant="destructive">Error</Badge>;
     default:

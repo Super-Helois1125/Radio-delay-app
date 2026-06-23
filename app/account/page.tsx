@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/hooks/use-app-router";
 import Link from "next/link";
 import { LogOut, Mail, Settings2, ShieldCheck, User2 } from "lucide-react";
 import { toast } from "sonner";
@@ -23,7 +23,7 @@ import {
 
 export default function AccountPage() {
   const { user, loading, configured, signOut } = useAuth();
-  const router = useRouter();
+  const router = useAppRouter();
   const [prefs, setPrefs] = useState<UserPreferences | null>(null);
 
   useEffect(() => {

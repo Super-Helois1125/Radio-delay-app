@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/hooks/use-app-router";
 import { Loader2, Play, Plus, Radio, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -23,7 +23,7 @@ import { usePlayerStore } from "@/store/player-store";
 import type { SavedStream } from "@/types";
 
 export function SavedStreams() {
-  const router = useRouter();
+  const router = useAppRouter();
   const setStation = usePlayerStore((s) => s.setStation);
 
   const [streams, setStreams] = useState<SavedStream[]>([]);

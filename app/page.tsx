@@ -33,8 +33,8 @@ export default function HomePage() {
           <img
             src="/assets/Images/hero-image.jpg"
             alt=""
-            width={1168}
-            height={784}
+            width={1920}
+            height={1080}
             className="hero-section__image"
           />
         </div>
@@ -64,39 +64,48 @@ export default function HomePage() {
 
       {/* Showcase — reference-style stacked cards */}
       <section className="page-section showcase-section w-full">
-        <ScrollReveal className="mx-auto max-w-3xl text-center">
+        <ScrollReveal className="showcase-section__intro mx-auto text-center">
           <span className="eyebrow">Why PlayDelay</span>
-          <h2 className="section-heading">
+          <h2 className="showcase-section__title section-heading">
             Everything you need to stay in sync
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            A focused toolset built around one job: making sports radio match
-            your screen, reliably.
+          <p className="showcase-section__lede">
+            A focused toolset built around one job: making sports radio match your screen, reliably.
           </p>
         </ScrollReveal>
 
         <ShowcaseStaggerGrid />
       </section>
 
-      {/* How it works */}
-      <section className="section-intense">
-        <div className="page-gutter relative">
-          <ScrollReveal className="mx-auto max-w-3xl text-center">
-            <span className="eyebrow">How it works</span>
-            <h2 className="section-heading">In sync in three steps</h2>
-          </ScrollReveal>
-          <ScrollReveal className="mt-16" variant="scale" delay={100}>
-            <div className="step-glass-fan">
-              {STEPS.map((s) => (
-                <HowItWorksStepCard
-                  key={s.n}
-                  step={s.n}
-                  title={s.title}
-                  description={s.text}
-                />
-              ))}
-            </div>
-          </ScrollReveal>
+      {/* How it works — page3 background, height follows image */}
+      <section className="how-it-works-section w-full">
+        <div className="how-it-works-section__frame">
+          <img
+            src="/assets/page3.jpg"
+            alt=""
+            width={3840}
+            height={1600}
+            className="how-it-works-section__image"
+          />
+          <div className="how-it-works-section__overlay" aria-hidden />
+          <div className="how-it-works-section__inner page-gutter">
+            <ScrollReveal className="mx-auto max-w-3xl text-center">
+              <span className="eyebrow">How it works</span>
+              <h2 className="section-heading">In sync in three steps</h2>
+            </ScrollReveal>
+            <ScrollReveal className="mt-16" variant="scale" delay={100}>
+              <div className="step-glass-fan">
+                {STEPS.map((s) => (
+                  <HowItWorksStepCard
+                    key={s.n}
+                    step={s.n}
+                    title={s.title}
+                    description={s.text}
+                  />
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 

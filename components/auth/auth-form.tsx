@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Loader2, Lock, Mail } from "lucide-react";
 import { toast } from "sonner";
@@ -11,11 +11,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth/auth-provider";
+import { useAppRouter } from "@/hooks/use-app-router";
 
 type Mode = "login" | "signup";
 
 export function AuthForm({ mode }: { mode: Mode }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const params = useSearchParams();
   const { configured } = useAuth();
   const [email, setEmail] = useState("");

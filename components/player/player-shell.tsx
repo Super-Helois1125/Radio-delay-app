@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { DelayControls } from "@/components/player/delay-controls";
 import { DelayDisplay } from "@/components/player/delay-display";
 import { StationSwitcher } from "@/components/player/station-switcher";
+import { StreamUrlButton } from "@/components/player/stream-url-button";
 import { StreamStatus } from "@/components/player/stream-status";
 import { SyncGuidance } from "@/components/player/sync-guidance";
 import { VolumeControl } from "@/components/player/volume-control";
@@ -181,11 +182,7 @@ export function PlayerShell() {
               <h2 className="truncate text-2xl font-extrabold">
                 {station?.name ?? "No station selected"}
               </h2>
-              {station && (
-                <p className="truncate text-sm text-muted-foreground">
-                  {station.streamUrl}
-                </p>
-              )}
+              {station && <StreamUrlButton url={station.streamUrl} />}
             </div>
             <StreamStatus
               status={status}
