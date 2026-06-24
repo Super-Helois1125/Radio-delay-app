@@ -15,6 +15,7 @@ type ShowcaseCardProps = {
   icon?: LucideIcon;
   imageSrc?: string;
   imageAlt?: string;
+  backgroundImage?: string;
   className?: string;
 };
 
@@ -29,12 +30,27 @@ export function ShowcaseCard({
   icon: Icon,
   imageSrc,
   imageAlt,
+  backgroundImage,
   className,
 }: ShowcaseCardProps) {
   const hasImage = Boolean(imageSrc);
 
   return (
-    <article className={cn("showcase-card group", className)}>
+    <article
+      className={cn(
+        "showcase-card group",
+        backgroundImage && "showcase-card--has-bg",
+        className
+      )}
+    >
+      {backgroundImage && (
+        <span
+          className="showcase-card__bg"
+          aria-hidden
+          style={{ backgroundImage: `url("${backgroundImage}")` }}
+        />
+      )}
+
       <div className="showcase-card__header">
         {hasImage ? (
           <span className="showcase-card__icon showcase-card__icon--image">

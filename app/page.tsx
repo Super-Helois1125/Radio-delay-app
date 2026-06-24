@@ -1,5 +1,6 @@
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { CtaAnimatedCard } from "@/components/landing/cta-animated-card";
+import { HowItWorksCurvedTitle } from "@/components/landing/how-it-works-curved-title";
 import { HowItWorksStepCard } from "@/components/landing/how-it-works-step-card";
 import { HeroContent } from "@/components/landing/hero-content";
 import { HeroRadioVisual } from "@/components/landing/hero-radio-visual";
@@ -89,9 +90,18 @@ export default function HomePage() {
           />
           <div className="how-it-works-section__overlay" aria-hidden />
           <div className="how-it-works-section__inner page-gutter">
-            <ScrollReveal className="mx-auto max-w-3xl text-center">
-              <span className="eyebrow">How it works</span>
-              <h2 className="section-heading">In sync in three steps</h2>
+            <ScrollReveal className="how-it-works-section__intro mx-auto w-full max-w-6xl text-center">
+              <span className="how-it-works-eyebrow-btn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                >
+                  <path d="M8 5v14l11-7-7-11z" />
+                </svg>
+                How it works
+              </span>
+              <HowItWorksCurvedTitle />
             </ScrollReveal>
             <ScrollReveal className="mt-16" variant="scale" delay={100}>
               <div className="step-glass-fan">

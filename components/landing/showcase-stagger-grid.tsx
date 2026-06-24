@@ -13,6 +13,7 @@ type ShowcaseItem = {
   secondaryHref?: string;
   badge: string;
   icon: LucideIcon;
+  backgroundImage?: string;
 };
 
 const SHOWCASE: ShowcaseItem[] = [
@@ -23,6 +24,7 @@ const SHOWCASE: ShowcaseItem[] = [
     text: "Shift radio audio in 1-, 10-, or 60-second steps, or jump to a preset. Changes apply smoothly with no clicks.",
     href: "/player",
     secondaryHref: "/stream-tester",
+    backgroundImage: "/assets/second%20page/first.png",
   },
   {
     icon: Gauge,
@@ -31,6 +33,7 @@ const SHOWCASE: ShowcaseItem[] = [
     text: "A Web Audio AudioWorklet ring buffer delivers low-latency, sample-accurate delay that ramps gracefully in real time.",
     href: "/player",
     secondaryHref: "/saved-streams",
+    backgroundImage: "/assets/second%20page/ring%20.png",
   },
   {
     icon: Tv,
@@ -39,6 +42,7 @@ const SHOWCASE: ShowcaseItem[] = [
     text: "Tell us how the radio compares to your broadcast and we guide you to the exact fix — delay the audio, or delay the video.",
     href: "/player",
     secondaryHref: "/stream-tester",
+    backgroundImage: "/assets/second%20page/ahead.png",
   },
   {
     icon: TestTube2,
@@ -47,6 +51,7 @@ const SHOWCASE: ShowcaseItem[] = [
     text: "Paste any stream URL to verify it loads, plays, and supports processing before you rely on it for game day.",
     href: "/stream-tester",
     secondaryHref: "/player",
+    backgroundImage: "/assets/second%20page/test.png",
   },
 ];
 
@@ -70,6 +75,7 @@ export function ShowcaseStaggerGrid() {
             description={item.text}
             href={item.href}
             secondaryHref={item.secondaryHref}
+            backgroundImage={item.backgroundImage}
             linkLabel="Learn more"
             secondaryLabel="Open player"
           />
