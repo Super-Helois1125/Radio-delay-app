@@ -2,11 +2,13 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
 import type { Database } from "@/types/database";
+import { clearSupabaseAuthCookies } from "./auth-cookies";
 import {
   SUPABASE_ANON_KEY,
   SUPABASE_URL,
   isSupabaseConfigured,
 } from "./config";
+import { safeGetUser, safeSignOut } from "./safe-auth";
 
 /** App routes that require an authenticated user. */
 const PROTECTED_PREFIXES = [
@@ -14,6 +16,8 @@ const PROTECTED_PREFIXES = [
   "/stream-tester",
   "/saved-streams",
   "/account",
+  "/dashboard",
+  "/admin",
 ];
 
 /** Auth routes an already-signed-in user should be bounced away from. */
@@ -49,10 +53,16 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const auth = await safeGetUser(supabase);
 
+  // Stale or unreachable auth — drop cookies so the browser stops retrying
+  // token refresh (the source of the "fetch failed" spam in the console).
+  if (auth.invalidSession || auth.networkError) {
+    await safeSignOut(supabase);
+    clearSupabaseAuthCookies(supabaseResponse, request);
+  }
+
+  const user = auth.user;
   const { pathname } = request.nextUrl;
   const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
   const isAuthRoute = AUTH_ROUTES.some((p) => pathname.startsWith(p));

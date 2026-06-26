@@ -9,19 +9,26 @@ import { useAuth } from "@/components/auth/auth-provider";
 import { useAppRouter } from "@/hooks/use-app-router";
 import { cn } from "@/lib/utils";
 
-const NAV_LINKS = [
+const PUBLIC_LINKS = [
   { href: "/", label: "Home" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/teams", label: "Teams" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/player", label: "Player" },
-  { href: "/stream-tester", label: "Stream Tester" },
-  { href: "/saved-streams", label: "Saved Streams" },
 ];
 
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useAppRouter();
-  const { user, configured, signOut } = useAuth();
+  const { user, configured, isAdmin, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const NAV_LINKS = [
+    ...PUBLIC_LINKS,
+    ...(user || !configured ? [{ href: "/dashboard", label: "Dashboard" }] : []),
+    ...(isAdmin ? [{ href: "/admin", label: "Admin" }] : []),
+  ];
 
   useEffect(() => {
     function onScroll() {

@@ -1,19 +1,41 @@
 import { ArrowRight, Radio } from "lucide-react";
 import Link from "next/link";
 
+import { cn } from "@/lib/utils";
+
 type HowItWorksStepCardProps = {
   step: string;
   title: string;
   description: string;
+  backgroundImage?: string;
+  backgroundPosition?: string;
 };
 
 export function HowItWorksStepCard({
   step,
   title,
   description,
+  backgroundImage,
+  backgroundPosition = "center",
 }: HowItWorksStepCardProps) {
   return (
-    <article className="step-glass-card">
+    <article
+      className={cn(
+        "step-glass-card",
+        backgroundImage && "step-glass-card--has-bg"
+      )}
+    >
+      {backgroundImage && (
+        <span
+          className="step-glass-card__bg"
+          aria-hidden
+          style={{
+            backgroundImage: `url("${backgroundImage}")`,
+            backgroundPosition,
+          }}
+        />
+      )}
+
       <div className="step-glass-card__content">
         <span className="step-glass-card__step" aria-hidden>
           {step}

@@ -7,6 +7,7 @@ import {
   SUPABASE_URL,
   isSupabaseConfigured,
 } from "./config";
+import { safeGetUser } from "./safe-auth";
 
 async function buildServerClient() {
   const cookieStore = await cookies();
@@ -41,12 +42,10 @@ export async function createClient(): Promise<ServerClient | null> {
   return buildServerClient();
 }
 
-/** Returns the authenticated user (or null). Never throws on missing config. */
+/** Returns the authenticated user (or null). Never throws. */
 export async function getServerUser() {
   const supabase = await createClient();
   if (!supabase) return null;
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user } = await safeGetUser(supabase);
   return user;
 }

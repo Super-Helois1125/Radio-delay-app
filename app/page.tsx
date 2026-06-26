@@ -12,16 +12,20 @@ const STEPS = [
     n: "01",
     title: "Pick a station",
     text: "Choose a seed station or paste your own stream URL.",
+    backgroundImage: "/assets/Third%20page/pick.png",
   },
   {
     n: "02",
     title: "Press play",
     text: "The audio engine loads the stream through the Web Audio graph.",
+    backgroundImage: "/assets/Third%20page/press.png?v=2",
+    backgroundPosition: "62% center",
   },
   {
     n: "03",
     title: "Dial in the delay",
     text: "Nudge the delay until the radio call matches the picture on your TV.",
+    backgroundImage: "/assets/Third%20page/dial.png",
   },
 ];
 
@@ -111,6 +115,8 @@ export default function HomePage() {
                     step={s.n}
                     title={s.title}
                     description={s.text}
+                    backgroundImage={s.backgroundImage}
+                    backgroundPosition={s.backgroundPosition}
                   />
                 ))}
               </div>

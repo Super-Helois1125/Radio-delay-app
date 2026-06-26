@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BookmarkPlus, Keyboard, Pause, Play, Radio } from "lucide-react";
+import { BookmarkPlus, Keyboard, Pause, Play, Radio, Wand2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ import { DelayDisplay } from "@/components/player/delay-display";
 import { StationSwitcher } from "@/components/player/station-switcher";
 import { StreamUrlButton } from "@/components/player/stream-url-button";
 import { StreamStatus } from "@/components/player/stream-status";
+import { SyncWizard } from "@/components/player/sync-wizard";
 import { SyncGuidance } from "@/components/player/sync-guidance";
 import { VolumeControl } from "@/components/player/volume-control";
 import { useAudioEngine } from "@/hooks/use-audio-engine";
@@ -48,6 +49,7 @@ export function PlayerShell() {
   const [savedStations, setSavedStations] = useState<Station[]>([]);
   const [savedStationsReady, setSavedStationsReady] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [wizardOpen, setWizardOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [storeHydrated, setStoreHydrated] = useState(false);
 
@@ -106,6 +108,16 @@ export function PlayerShell() {
     void loadStation(next).catch(() => {
       /* loadStation reports failures through the player store */
     });
+  }
+
+  function handleWizardApply(
+    direction: typeof syncDirection,
+    suggestedDelay?: number
+  ) {
+    setSyncDirection(direction);
+    if (typeof suggestedDelay === "number" && processingEnabled) {
+      setDelay(suggestedDelay);
+    }
   }
 
   // Avoid hydration mismatch: the player reads persisted (client-only) state.
@@ -302,6 +314,24 @@ export function PlayerShell() {
           </div>
         </div>
 
+        <button
+          type="button"
+          className="player-sync-wizard-launch"
+          onClick={() => setWizardOpen(true)}
+        >
+          <span className="player-sync-wizard-launch__icon">
+            <Wand2 className="h-5 w-5" aria-hidden />
+          </span>
+          <span className="player-sync-wizard-launch__text">
+            <span className="player-sync-wizard-launch__title">
+              Run the Sync Wizard
+            </span>
+            <span className="player-sync-wizard-launch__subtitle">
+              Not sure what to adjust? We&apos;ll walk you through it.
+            </span>
+          </span>
+        </button>
+
         <SyncGuidance
           direction={syncDirection}
           onChange={setSyncDirection}
@@ -309,6 +339,13 @@ export function PlayerShell() {
           targetDelay={targetDelay}
         />
       </div>
+
+      <SyncWizard
+        open={wizardOpen}
+        onOpenChange={setWizardOpen}
+        processingEnabled={processingEnabled}
+        onApply={handleWizardApply}
+      />
     </div>
   );
 }
