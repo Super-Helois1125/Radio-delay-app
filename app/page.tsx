@@ -1,33 +1,15 @@
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { CtaAnimatedCard } from "@/components/landing/cta-animated-card";
-import { HowItWorksCurvedTitle } from "@/components/landing/how-it-works-curved-title";
-import { HowItWorksStepCard } from "@/components/landing/how-it-works-step-card";
 import { HeroContent } from "@/components/landing/hero-content";
 import { HeroRadioVisual } from "@/components/landing/hero-radio-visual";
+import { HowItWorksVisualSection } from "@/components/landing/how-it-works-visual-section";
 import { ShowcaseStaggerGrid } from "@/components/landing/showcase-stagger-grid";
 import { UpcomingGames } from "@/components/landing/upcoming-games";
-
-const STEPS = [
-  {
-    n: "01",
-    title: "Pick a station",
-    text: "Choose a seed station or paste your own stream URL.",
-    backgroundImage: "/assets/Third%20page/pick.png",
-  },
-  {
-    n: "02",
-    title: "Press play",
-    text: "The audio engine loads the stream through the Web Audio graph.",
-    backgroundImage: "/assets/Third%20page/press.png?v=2",
-    backgroundPosition: "62% center",
-  },
-  {
-    n: "03",
-    title: "Dial in the delay",
-    text: "Nudge the delay until the radio call matches the picture on your TV.",
-    backgroundImage: "/assets/Third%20page/dial.png",
-  },
-];
+import { ProblemSection } from "@/components/landing/problem-section";
+import { JourneySteps } from "@/components/landing/journey-steps";
+import { UseCasesSection } from "@/components/landing/use-cases-section";
+import { TeamsTeaser } from "@/components/landing/teams-teaser";
+import { PricingTeaser } from "@/components/landing/pricing-teaser";
 
 export default function HomePage() {
   return (
@@ -67,6 +49,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Problem — why PlayDelay exists */}
+      <ProblemSection />
+
+      {/* How it works — five-step game-day flow */}
+      <JourneySteps />
+
       {/* Showcase — reference-style stacked cards */}
       <section className="page-section showcase-section w-full">
         <ScrollReveal className="showcase-section__intro mx-auto text-center">
@@ -82,48 +70,14 @@ export default function HomePage() {
         <ShowcaseStaggerGrid />
       </section>
 
-      {/* How it works — page3 background, height follows image */}
-      <section className="how-it-works-section w-full">
-        <div className="how-it-works-section__frame">
-          <img
-            src="/assets/page3.jpg"
-            alt=""
-            width={3840}
-            height={1600}
-            className="how-it-works-section__image"
-          />
-          <div className="how-it-works-section__overlay" aria-hidden />
-          <div className="how-it-works-section__inner page-gutter">
-            <ScrollReveal className="how-it-works-section__intro mx-auto w-full max-w-6xl text-center">
-              <span className="how-it-works-eyebrow-btn">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  aria-hidden
-                >
-                  <path d="M8 5v14l11-7-7-11z" />
-                </svg>
-                How it works
-              </span>
-              <HowItWorksCurvedTitle />
-            </ScrollReveal>
-            <ScrollReveal className="mt-16" variant="scale" delay={100}>
-              <div className="step-glass-fan">
-                {STEPS.map((s) => (
-                  <HowItWorksStepCard
-                    key={s.n}
-                    step={s.n}
-                    title={s.title}
-                    description={s.text}
-                    backgroundImage={s.backgroundImage}
-                    backgroundPosition={s.backgroundPosition}
-                  />
-                ))}
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      {/* See it in action — visual step cards */}
+      <HowItWorksVisualSection />
+
+      {/* Use cases — who it's for */}
+      <UseCasesSection />
+
+      {/* Supported teams teaser */}
+      <TeamsTeaser />
 
       {/* Upcoming games */}
       <section className="page-section w-full">
@@ -131,13 +85,17 @@ export default function HomePage() {
           <span className="eyebrow">Game day</span>
           <h2 className="section-heading">Upcoming games</h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            A few teams to start — BYU, Duke, and national ESPN coverage.
+            Tonight&apos;s slate across college football, basketball, the NFL,
+            and NBA — with the right station ready for each matchup.
           </p>
         </ScrollReveal>
         <ScrollReveal className="mt-16" delay={100}>
           <UpcomingGames />
         </ScrollReveal>
       </section>
+
+      {/* Pricing teaser */}
+      <PricingTeaser />
 
       {/* CTA */}
       <section className="page-gutter w-full pb-24 pt-8">

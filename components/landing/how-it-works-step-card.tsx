@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight, Radio } from "lucide-react";
 import Link from "next/link";
 

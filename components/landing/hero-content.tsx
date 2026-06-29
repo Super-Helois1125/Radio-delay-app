@@ -72,7 +72,7 @@ export function HeroContent() {
           >
             <Link href="/player">
               <Play className="h-4 w-4 fill-current" />
-              Open the player
+              Start syncing
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>

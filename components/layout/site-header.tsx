@@ -105,11 +105,11 @@ export function SiteHeader() {
                   <span>Log in</span>
                 </Link>
                 <Link
-                  href={configured ? "/signup" : "/player"}
-                  className="site-header-pill__link site-header-pill__link--cta"
-                >
-                  <span>{configured ? "Get started" : "Open player"}</span>
-                </Link>
+                href="/player"
+                className="site-header-pill__link site-header-pill__link--cta"
+              >
+                <span>Start syncing</span>
+              </Link>
               </>
             )}
           </div>
@@ -179,11 +179,11 @@ export function SiteHeader() {
                       <span>Log in</span>
                     </Link>
                     <Link
-                      href={configured ? "/signup" : "/player"}
+                      href="/player"
                       onClick={() => setOpen(false)}
                       className="site-header-pill__link site-header-pill__link--stack site-header-pill__link--cta"
                     >
-                      <span>{configured ? "Get started" : "Open player"}</span>
+                      <span>Start syncing</span>
                     </Link>
                   </>
                 )}
