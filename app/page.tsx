@@ -1,3 +1,4 @@
+import { NitroSectionTitle } from "@/components/landing/nitro-section-title";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { CtaAnimatedCard } from "@/components/landing/cta-animated-card";
 import { HeroContent } from "@/components/landing/hero-content";
@@ -57,15 +58,16 @@ export default function HomePage() {
 
       {/* Showcase — reference-style stacked cards */}
       <section className="page-section showcase-section w-full">
-        <ScrollReveal className="showcase-section__intro mx-auto text-center">
-          <span className="eyebrow">Why PlayDelay</span>
-          <h2 className="showcase-section__title section-heading">
-            Everything you need to stay in sync
-          </h2>
-          <p className="showcase-section__lede">
-            A focused toolset built around one job: making sports radio match your screen, reliably.
-          </p>
-        </ScrollReveal>
+        <div className="showcase-section__intro mx-auto">
+          <NitroSectionTitle
+            pretitle="Why PlayDelay"
+            titleBefore="Everything you need to stay in "
+            strokeWord="sync"
+            titleAfter=""
+            subtitle="A focused toolset built around one job: making sports radio match your screen, reliably."
+            singleLine
+          />
+        </div>
 
         <ShowcaseStaggerGrid />
       </section>
@@ -81,14 +83,16 @@ export default function HomePage() {
 
       {/* Upcoming games */}
       <section className="page-section w-full">
-        <ScrollReveal className="mx-auto max-w-3xl text-center">
-          <span className="eyebrow">Game day</span>
-          <h2 className="section-heading">Upcoming games</h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Tonight&apos;s slate across college football, basketball, the NFL,
-            and NBA — with the right station ready for each matchup.
-          </p>
-        </ScrollReveal>
+        <div className="mx-auto mb-12 max-w-6xl">
+          <NitroSectionTitle
+            pretitle="Game day"
+            titleBefore="Upcoming "
+            strokeWord="games"
+            titleAfter=""
+            subtitle="Tonight's slate across college football, basketball, the NFL, and NBA — with the right station ready for each matchup."
+            singleLine
+          />
+        </div>
         <ScrollReveal className="mt-16" delay={100}>
           <UpcomingGames />
         </ScrollReveal>

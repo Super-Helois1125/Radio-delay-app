@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 
+import { NitroSectionTitle } from "@/components/landing/nitro-section-title";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { catalogService } from "@/services/catalog-service";
 
@@ -11,14 +12,16 @@ export function TeamsTeaser() {
 
   return (
     <section className="page-section w-full">
-      <ScrollReveal className="mx-auto mb-12 max-w-3xl text-center">
-        <span className="eyebrow">Supported teams</span>
-        <h2 className="section-heading">Find your team, find your station</h2>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Every team has official and backup radio stations with live stream
-          health, so you always know what&apos;s ready before kickoff.
-        </p>
-      </ScrollReveal>
+      <div className="mx-auto mb-12 max-w-6xl">
+        <NitroSectionTitle
+          pretitle="Supported teams"
+          titleBefore="Find your team, find your "
+          strokeWord="station"
+          titleAfter=""
+          subtitle="Every team has official and backup radio stations with live stream health, so you always know what's ready before kickoff."
+          singleLine
+        />
+      </div>
 
       <ScrollReveal delay={100}>
         <div className="mx-auto grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-4">

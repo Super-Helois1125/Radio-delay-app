@@ -4,20 +4,23 @@ import Link from "next/link";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 
 import { PLANS } from "@/lib/plans";
+import { NitroSectionTitle } from "@/components/landing/nitro-section-title";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { cn } from "@/lib/utils";
 
 export function PricingTeaser() {
   return (
     <section className="page-section w-full">
-      <ScrollReveal className="mx-auto mb-12 max-w-3xl text-center">
-        <span className="eyebrow">Pricing</span>
-        <h2 className="section-heading">Start free. Upgrade on game day.</h2>
-        <p className="mt-4 text-lg text-muted-foreground">
-          The player and Sync Wizard are free forever. Premium unlocks unlimited
-          saved streams, reminders, and low-latency suggestions.
-        </p>
-      </ScrollReveal>
+      <div className="mx-auto mb-12 max-w-6xl">
+        <NitroSectionTitle
+          pretitle="Pricing"
+          titleBefore="Start free. Upgrade on "
+          strokeWord="game day"
+          titleAfter="."
+          subtitle="The player and Sync Wizard are free forever. Premium unlocks unlimited saved streams, reminders, and low-latency suggestions."
+          singleLine
+        />
+      </div>
 
       <ScrollReveal delay={100}>
         <div className="mx-auto grid max-w-5xl gap-5 lg:grid-cols-3">

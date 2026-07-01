@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { TopBar } from "@/components/layout/top-bar";
 import { SetupNotice } from "@/components/layout/setup-notice";
 import { Toaster } from "@/components/ui/sonner";
+import { nitroBody, nitroDisplay } from "@/lib/nitro-fonts";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -30,7 +31,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} font-sans antialiased`}>
+      <body
+        className={`${poppins.variable} ${nitroDisplay.variable} ${nitroBody.variable} font-sans antialiased`}
+      >
         <Providers>
           <SpotlightBackground />
           <div className="relative flex min-h-screen flex-col">

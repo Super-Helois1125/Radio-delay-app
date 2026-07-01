@@ -9,6 +9,7 @@ import {
   Volleyball,
 } from "lucide-react";
 
+import { NitroSectionTitle } from "@/components/landing/nitro-section-title";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const USE_CASES = [
@@ -47,14 +48,16 @@ const USE_CASES = [
 export function UseCasesSection() {
   return (
     <section className="page-section w-full">
-      <ScrollReveal className="mx-auto mb-12 max-w-3xl text-center">
-        <span className="eyebrow">Built for game day</span>
-        <h2 className="section-heading">Made for every kind of fan</h2>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Whatever you&apos;re watching, PlayDelay keeps the commentary you want
-          in sync with the action.
-        </p>
-      </ScrollReveal>
+      <div className="mx-auto mb-12 max-w-6xl">
+        <NitroSectionTitle
+          pretitle="Built for game day"
+          titleBefore="Made for every kind of "
+          strokeWord="fan"
+          titleAfter=""
+          subtitle="Whatever you're watching, PlayDelay keeps the commentary you want in sync with the action."
+          singleLine
+        />
+      </div>
 
       <ScrollReveal delay={100}>
         <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
