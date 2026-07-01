@@ -45,13 +45,6 @@ export function JourneySteps() {
   return (
     <section className="journey-steps-section w-full">
       <div className="journey-steps-section__frame">
-        <img
-          src="/assets/backgrounds/second%20back.png"
-          alt=""
-          width={1920}
-          height={1080}
-          className="journey-steps-section__image"
-        />
         <div className="journey-steps-section__overlay" aria-hidden />
         <div className="journey-steps-section__inner page-gutter">
           <div className="mx-auto mb-12 max-w-6xl">
